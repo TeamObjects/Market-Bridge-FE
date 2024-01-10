@@ -2,6 +2,6 @@
 
 ```bash
 git clone https://github.com/TeamObjects/Market-Bridge-FE.git
-npx install
-npm run dev
+yarn install
+yarn run dev
 ```
