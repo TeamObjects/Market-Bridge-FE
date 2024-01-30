@@ -47,8 +47,8 @@ const Header: React.FC = () => {
         />
       </div>
       <div className="flex w-[20%] justify-around items-center ">
-        <Link href="/">회원가입</Link>
-        <Link href="/">로그인</Link>
+        <Link href="/register">회원가입</Link>
+        <Link href="/login">로그인</Link>
         <Link href="/">고객센터</Link>
         <Image
           src={Mypage}
