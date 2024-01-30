@@ -1,14 +1,22 @@
-import React from 'react';
-import Link from 'next/link';
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
 import {
   BridgeLogo,
   Category,
   Mypage,
   ShoppingBasket,
 } from '../../public/svgs';
+import { usePathname } from 'next/navigation';
 
 const Header: React.FC = () => {
+  const path = usePathname();
+
+  if (path === '/login' || path === '/register') return null;
+
   return (
     <header className="flex flex-row w-[100%] h-[10rem] text-[1.6rem]">
       <div className="flex w-[25%] justify-center items-center">
