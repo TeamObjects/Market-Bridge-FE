@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import {
   BridgeLogo,
@@ -10,7 +10,6 @@ import {
   Mypage,
   ShoppingBasket,
 } from '../../public/svgs';
-import { usePathname } from 'next/navigation';
 
 const Header: React.FC = () => {
   const path = usePathname();
@@ -54,7 +53,7 @@ const Header: React.FC = () => {
           className="flex w-[90%] h-[40%] border border-[#03BAF2] rounded-full"
         />
       </div>
-      <div className="flex w-[20%] justify-around items-center ">
+      <div className="flex w-[20%] justify-around items-center">
         <Link href="/register">회원가입</Link>
         <Link href="/login">로그인</Link>
         <Link href="/">고객센터</Link>

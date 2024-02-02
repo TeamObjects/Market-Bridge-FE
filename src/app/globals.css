@@ -5,3 +5,12 @@
 html {
   font-size: 62.5%;
 }
+
+.checkbox:checked + .custom-checkbox::after {
+  content: '✓';
+  position: absolute;
+  top: 2px;
+  left: 7px;
+  font-size: 10px;
+  color: #011b5b;
+}
