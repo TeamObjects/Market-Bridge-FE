@@ -11,10 +11,17 @@ import {
   ShoppingBasket,
 } from '../../public/svgs';
 
+const EXCLUSION_PATHS = [
+  '/login',
+  '/register',
+  '/login/findId',
+  '/login/findPassword',
+];
+
 const Header: React.FC = () => {
   const path = usePathname();
 
-  if (path === '/login' || path === '/register') return null;
+  if (EXCLUSION_PATHS.includes(path)) return null;
 
   return (
     <header className="flex flex-row w-[100%] h-[10rem] text-[1.6rem]">

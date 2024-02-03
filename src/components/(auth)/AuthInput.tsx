@@ -2,6 +2,7 @@ interface AuthInputProps {
   type: string;
   placeholder: string;
   style?: string;
+  id?: string;
 }
 
 const STYLE_INPUT_DEFAULT =
@@ -11,8 +12,11 @@ const AuthInput = ({
   type,
   placeholder,
   style = STYLE_INPUT_DEFAULT,
+  id,
 }: AuthInputProps) => {
-  return <input type={type} placeholder={placeholder} className={style} />;
+  return (
+    <input id={id} type={type} placeholder={placeholder} className={style} />
+  );
 };
 
 export default AuthInput;

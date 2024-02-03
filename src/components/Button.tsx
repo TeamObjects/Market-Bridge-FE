@@ -5,13 +5,13 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-const STYLE_DEFAULT =
+export const STYLE_BUTTON_DEFAULT =
   'w-[100%] h-[44px] xs:h-[40px] p-6 mb-4 text-[13px] text-white rounded-full bg-[#011B5B]';
 
 const Button = ({
   text,
   type = 'button',
-  style = STYLE_DEFAULT,
+  style = STYLE_BUTTON_DEFAULT,
   onClick,
 }: ButtonProps) => {
   return (

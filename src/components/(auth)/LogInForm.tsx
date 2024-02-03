@@ -1,3 +1,6 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
 import Button from '../Button';
 import AuthInput from './AuthInput';
 
@@ -6,6 +9,8 @@ const STYLE_WHITE_BUTTON =
 const STYLE_FIND_AUTH = 'text-[#011B5B]';
 
 const LogInForm = () => {
+  const router = useRouter();
+
   return (
     <form>
       <h1 className="my-6 text-3xl">로그인</h1>
@@ -22,17 +27,23 @@ const LogInForm = () => {
           <Button
             text="아이디"
             style={`${STYLE_FIND_AUTH} mx-2 hover:border-b-[1px] hover:border-[#011B5B]`}
+            onClick={() => router.push('/login/findId')}
           />
           /
           <Button
             text="비밀번호"
             style={`${STYLE_FIND_AUTH} mx-2 hover:border-b-[1px] hover:border-[#011B5B]`}
+            onClick={() => router.push('/login/findPassword')}
           />
           <div>찾기</div>
         </div>
       </div>
-      <Button text="로그인" />
-      <Button text="회원가입" style={STYLE_WHITE_BUTTON} />
+      <Button text="로그인" onClick={() => router.push('/')} />
+      <Button
+        text="회원가입"
+        style={STYLE_WHITE_BUTTON}
+        onClick={() => router.push('/register')}
+      />
     </form>
   );
 };
