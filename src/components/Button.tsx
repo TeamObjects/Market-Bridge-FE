@@ -1,8 +1,10 @@
+import { MouseEventHandler, forwardRef } from 'react';
+
 interface ButtonProps {
   text: string;
   type?: 'button' | 'submit' | 'reset' | undefined;
   style?: string;
-  onClick?: () => void;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
 export const STYLE_BUTTON_DEFAULT =

@@ -1,8 +1,12 @@
+import { ChangeEvent } from 'react';
+
 interface AuthInputProps {
   type: string;
+  name: string;
   placeholder: string;
   style?: string;
   id?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const STYLE_INPUT_DEFAULT =
@@ -10,12 +14,21 @@ const STYLE_INPUT_DEFAULT =
 
 const AuthInput = ({
   type,
+  name,
   placeholder,
   style = STYLE_INPUT_DEFAULT,
   id,
+  onChange,
 }: AuthInputProps) => {
   return (
-    <input id={id} type={type} placeholder={placeholder} className={style} />
+    <input
+      id={id}
+      type={type}
+      name={name}
+      placeholder={placeholder}
+      className={style}
+      onChange={onChange}
+    />
   );
 };
 

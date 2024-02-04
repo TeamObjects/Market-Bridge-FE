@@ -14,8 +14,12 @@ const LogInForm = () => {
   return (
     <form>
       <h1 className="my-6 text-3xl">로그인</h1>
-      <AuthInput type="text" placeholder="아이디를 입력해주세요" />
-      <AuthInput type="password" placeholder="비밀번호를 입력해주세요" />
+      <AuthInput type="text" name="email" placeholder="아이디를 입력해주세요" />
+      <AuthInput
+        type="password"
+        name="password"
+        placeholder="비밀번호를 입력해주세요"
+      />
       <div className="flex items-center justify-between h-[15px] my-6 text-xl">
         <div>
           <label htmlFor="auto-login" className="flex items-center">
