@@ -1,4 +1,7 @@
-import { ChangeEvent } from 'react';
+'use client';
+
+import { FormValue, formContext } from '@/contexts/FormContext';
+import { useContext } from 'react';
 
 interface AuthInputProps {
   type: string;
@@ -6,7 +9,6 @@ interface AuthInputProps {
   placeholder: string;
   style?: string;
   id?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const STYLE_INPUT_DEFAULT =
@@ -18,8 +20,9 @@ const AuthInput = ({
   placeholder,
   style = STYLE_INPUT_DEFAULT,
   id,
-  onChange,
 }: AuthInputProps) => {
+  const { handleChange } = useContext(formContext) as FormValue;
+
   return (
     <input
       id={id}
@@ -27,7 +30,7 @@ const AuthInput = ({
       name={name}
       placeholder={placeholder}
       className={style}
-      onChange={onChange}
+      onChange={handleChange}
     />
   );
 };

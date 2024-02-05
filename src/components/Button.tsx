@@ -1,4 +1,4 @@
-import { MouseEventHandler, forwardRef } from 'react';
+import { MouseEventHandler } from 'react';
 
 interface ButtonProps {
   text: string;

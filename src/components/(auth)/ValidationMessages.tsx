@@ -1,7 +1,19 @@
-import { ReactNode } from 'react'
+'use client';
 
-const ValidationMessages = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>
+import { FormValue, formContext } from '@/contexts/FormContext';
+import { ReactNode, useContext } from 'react';
+
+interface ValidationMessagesProps {
+  children: ReactNode;
+  name: string;
 }
 
-export default ValidationMessages
+const ValidationMessages = ({ children, name }: ValidationMessagesProps) => {
+  const { isEmpty, isValid } = useContext(formContext) as FormValue;
+
+  if (!isValid || !isEmpty) return null;
+
+  return <>{!isValid[name] && !isEmpty[name] && <div>{children}</div>}</>;
+};
+
+export default ValidationMessages;

@@ -67,3 +67,14 @@ export const isPasswordCheck = (value: string) => {
   // 모든 조건을 만족하는지 확인
   return conditionsMet && !sequentialOrSame;
 };
+
+export interface ValidationFunctions {
+  [key: string]: (val1: string) => boolean;
+}
+
+export const validationFunctions: ValidationFunctions = {
+  email: isEmailCheck,
+  password: isPasswordCheck,
+  name: isNameCheck,
+  phone: isPhoneCheck,
+};

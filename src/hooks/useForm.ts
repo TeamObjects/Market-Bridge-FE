@@ -1,14 +1,12 @@
-import {
-  UserInfo,
-  ValidationFunctions,
-} from '@/components/(auth)/RegisterForm';
+import { UserInfo } from '@/components/(auth)/RegisterFormView';
+import { ValidationFunctions } from '@/utils/isValidationCheck';
 
 import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react';
 
-interface useFromProps {
+export interface useFormProps {
   formType: string;
-  onSubmit: () => void;
-  validate: ValidationFunctions;
+  onSubmit?: () => void;
+  validate?: ValidationFunctions;
 }
 
 const initialValue = {
@@ -32,7 +30,7 @@ const initialEmptyValue = {
   phone: true,
 };
 
-const useForm = ({ formType, onSubmit, validate }: useFromProps) => {
+const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const [values, setValues] = useState<UserInfo>(initialValue);
   const [isValid, setIsValid] = useState(initialValidValue);
   const [isEmpty, setIsEmpty] = useState(initialEmptyValue);
@@ -43,17 +41,17 @@ const useForm = ({ formType, onSubmit, validate }: useFromProps) => {
 
     if (value !== '') {
       setIsEmpty((prev) => ({ ...prev, [name]: false }));
+    } else {
+      setIsEmpty((prev) => ({ ...prev, [name]: true }));
     }
 
     setValues((prev) => ({ ...prev, [name]: value }));
 
-    const isValidFunction = validate[name];
+    const isValidFunction = validate && validate[name];
     if (isValidFunction) {
       const isValid = isValidFunction(value);
       setIsValid((prev) => ({ ...prev, [name]: isValid }));
     }
-
-    handleAllUserInfoCheck();
   };
 
   const handleAllUserInfoCheck = () => {
@@ -70,13 +68,14 @@ const useForm = ({ formType, onSubmit, validate }: useFromProps) => {
   };
 
   const handleClickContinue: MouseEventHandler<HTMLButtonElement> = () => {
+    console.log(1);
     handleAllUserInfoCheck();
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit();
+    onSubmit && onSubmit();
   };
 
   const getFieldProps = (name: string) => {
