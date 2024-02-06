@@ -1,16 +1,9 @@
-'use client';
-
-import { usePathname, useRouter } from 'next/navigation';
 import Button, { STYLE_BUTTON_DEFAULT } from '../../Button';
 import FindAuthInput from './FindAuthInput';
 
-const FindAuthForm = () => {
-  const router = useRouter();
-  const path = usePathname();
-  const pathCheck = path === '/login/findPassword';
-
+const FindAuthForm = ({ onClick }: { onClick: () => void }) => {
   return (
-    <form>
+    <>
       <FindAuthInput
         label="이름"
         type="text"
@@ -32,15 +25,9 @@ const FindAuthForm = () => {
       <Button
         text="인증번호 받기"
         style={`${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
-        onClick={() =>
-          router.push(
-            pathCheck
-              ? '/login/findPassword?complete=password'
-              : '/login/findId?complete=id',
-          )
-        }
+        onClick={onClick}
       />
-    </form>
+    </>
   );
 };
 

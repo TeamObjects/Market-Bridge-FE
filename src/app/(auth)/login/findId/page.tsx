@@ -5,7 +5,8 @@ import FindAuthNav from '@/components/(auth)/(findAuth)/FindAuthNav';
 import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import FoundAuthPage from '@/components/(auth)/(findAuth)/FoundAuthPage';
 import Button from '@/components/Button';
-import { useSearchParams } from 'next/navigation';
+import FormContext from '@/contexts/FormContext';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { CiUser } from 'react-icons/ci';
 
@@ -16,6 +17,16 @@ const FindId = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const complete = searchParams.get('complete');
+  const path = usePathname();
+  const pathCheck = path === '/login/findPassword';
+
+  const handleButtonClick = () => {
+    router.push(
+      pathCheck
+        ? '/login/findPassword?complete=password'
+        : '/login/findId?complete=id',
+    );
+  };
 
   if (complete === 'id') {
     return (
@@ -35,7 +46,9 @@ const FindId = () => {
     <>
       <FindAuthPage header={<h1 className="text-3xl my-14">아이디 찾기</h1>}>
         <FindAuthNav />
-        <FindAuthForm />
+        <FormContext id="findId-form" formType="findId">
+          <FindAuthForm onClick={handleButtonClick} />
+        </FormContext>
       </FindAuthPage>
     </>
   );
