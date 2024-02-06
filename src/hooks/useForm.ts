@@ -9,26 +9,17 @@ export interface useFormProps {
   validate?: ValidationFunctions;
 }
 
-const initialValue = {
-  email: '',
-  password: '',
-  name: '',
-  phone: '',
-};
+const fields = ['email', 'password', 'name', 'phone'];
 
-const initialValidValue = {
-  email: false,
-  password: false,
-  name: false,
-  phone: false,
-};
-
-const initialEmptyValue = {
-  email: true,
-  password: true,
-  name: true,
-  phone: true,
-};
+const initialValue = Object.fromEntries(
+  fields.map((field) => [field, '']),
+) as UserInfo;
+const initialValidValue = Object.fromEntries(
+  fields.map((field) => [field, false]),
+);
+const initialEmptyValue = Object.fromEntries(
+  fields.map((field) => [field, true]),
+);
 
 const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const [values, setValues] = useState<UserInfo>(initialValue);
