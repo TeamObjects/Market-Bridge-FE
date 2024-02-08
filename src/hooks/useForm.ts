@@ -59,7 +59,6 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   };
 
   const handleClickContinue: MouseEventHandler<HTMLButtonElement> = () => {
-    console.log(1);
     handleAllUserInfoCheck();
   };
 

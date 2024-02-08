@@ -1,9 +1,8 @@
 'use client';
 
-import { FormValue, formContext } from '@/contexts/FormContext';
-import { useContext } from 'react';
-
-import RegisterFormView from './RegisterFormView';
+import FormContext from '@/contexts/FormContext';
+import { validationFunctions } from '@/utils/isValidationCheck';
+import { ReactNode } from 'react';
 
 export interface UserInfo {
   email: string;
@@ -13,18 +12,17 @@ export interface UserInfo {
   [key: string]: string | undefined;
 }
 
-const RegisterForm = () => {
-  const { handleClickContinue, isEnterUserInfo } = useContext(
-    formContext,
-  ) as FormValue;
-
+const RegisterForm = ({ children }: { children: ReactNode }) => {
   return (
-    <>
-      <RegisterFormView
-        isEnterUserInfo={isEnterUserInfo}
-        handleClickContinue={handleClickContinue}
-      />
-    </>
+    <FormContext
+      formType="register"
+      id="register-form"
+      className=""
+      validate={validationFunctions}
+    >
+      {' '}
+      {children}
+    </FormContext>
   );
 };
 
