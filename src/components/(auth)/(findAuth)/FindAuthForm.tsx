@@ -1,7 +1,7 @@
-import Button, { STYLE_BUTTON_DEFAULT } from '../../Button';
+import FindAuthButton from './FindAuthButton';
 import FindAuthInput from './FindAuthInput';
 
-const FindAuthForm = ({ onClick }: { onClick: () => void }) => {
+const FindAuthForm = () => {
   return (
     <>
       <FindAuthInput
@@ -22,11 +22,7 @@ const FindAuthForm = ({ onClick }: { onClick: () => void }) => {
         name="authNumber"
         placeholder="인증번호 입력"
       />
-      <Button
-        text="인증번호 받기"
-        style={`${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
-        onClick={onClick}
-      />
+      <FindAuthButton />
     </>
   );
 };
