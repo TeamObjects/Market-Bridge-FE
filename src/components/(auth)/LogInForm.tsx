@@ -1,10 +1,20 @@
 'use client';
 
-import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
-import LoginFormView from './LoginFormView';
+import FormContext from '@/contexts/FormContext';
+import { validationFunctions } from '@/utils/isValidationCheck';
+import { ReactNode } from 'react';
 
-const LogInForm = ({ router }: { router: AppRouterInstance }) => {
-  return <LoginFormView router={router} />;
+const LogInForm = ({ children }: { children: ReactNode }) => {
+  return (
+    <FormContext
+      formType="login"
+      id="login-form"
+      className=""
+      validate={validationFunctions}
+    >
+      {children}
+    </FormContext>
+  );
 };
 
 export default LogInForm;
