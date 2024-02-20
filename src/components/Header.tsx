@@ -1,6 +1,9 @@
-import React from 'react';
-import Link from 'next/link';
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React from 'react';
 import {
   BridgeLogo,
   Category,
@@ -8,7 +11,18 @@ import {
   ShoppingBasket,
 } from '../../public/svgs';
 
+const EXCLUSION_PATHS = [
+  '/login',
+  '/register',
+  '/login/findId',
+  '/login/findPassword',
+];
+
 const Header: React.FC = () => {
+  const path = usePathname();
+
+  if (EXCLUSION_PATHS.includes(path)) return null;
+
   return (
     <header className="flex flex-row w-[100%] h-[10rem] text-[1.6rem]">
       <div className="flex w-[25%] justify-center items-center">
@@ -46,9 +60,9 @@ const Header: React.FC = () => {
           className="flex w-[90%] h-[40%] border border-[#03BAF2] rounded-full"
         />
       </div>
-      <div className="flex w-[20%] justify-around items-center ">
-        <Link href="/">회원가입</Link>
-        <Link href="/">로그인</Link>
+      <div className="flex w-[20%] justify-around items-center">
+        <Link href="/register">회원가입</Link>
+        <Link href="/login">로그인</Link>
         <Link href="/">고객센터</Link>
         <Image
           src={Mypage}
