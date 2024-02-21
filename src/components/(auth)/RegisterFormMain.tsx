@@ -43,11 +43,11 @@ const RegisterFormMain = () => {
           </ValidationMessages>
           <AuthInput
             type="text"
-            name="phone"
+            name="phoneNo"
             placeholder="휴대폰 번호를 입력해주세요"
           />
-          <ValidationMessages name="phone">
-            <ValidationMessage text="휴대폰 번호를 정확하게 입력하세요. ( - 포함)" />
+          <ValidationMessages name="phoneNo">
+            <ValidationMessage text="휴대폰 번호를 정확하게 입력하세요. ( - 제외)" />
           </ValidationMessages>
         </>
       )}
