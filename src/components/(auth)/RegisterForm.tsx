@@ -1,6 +1,6 @@
 'use client';
 
-import registerUser from '@/api/authApi';
+import { registerUser } from '@/api/authApi';
 import FormContext from '@/contexts/FormContext';
 import { validationFunctions } from '@/utils/isValidationCheck';
 import { useMutation } from '@tanstack/react-query';
