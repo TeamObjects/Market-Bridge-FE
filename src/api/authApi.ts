@@ -13,11 +13,6 @@ export const registerUser = async (userInfo: UserInfo) => {
     },
   );
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || '회원가입 실패');
-  }
-
   return response.json();
 };
 
@@ -32,11 +27,6 @@ export const loginUser = async (loginUserInfo: LoginUserInfo) => {
       body: JSON.stringify(loginUserInfo),
     },
   );
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(errorData.message || '로그인 실패');
-  }
 
   return response.json();
 };
