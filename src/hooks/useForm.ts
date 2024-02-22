@@ -1,15 +1,15 @@
-import { UserInfo } from '@/components/(auth)/RegisterFormView';
+import { UserInfo } from '@/components/(auth)/RegisterForm';
 import { ValidationFunctions } from '@/utils/isValidationCheck';
 
 import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react';
 
 export interface useFormProps {
   formType: string;
-  onSubmit?: () => void;
+  onSubmit?: (values: UserInfo) => void;
   validate?: ValidationFunctions;
 }
 
-const fields = ['email', 'password', 'name', 'phone'];
+const fields = ['email', 'password', 'name', 'phoneNo'];
 
 const initialValue = Object.fromEntries(
   fields.map((field) => [field, '']),
@@ -65,7 +65,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit && onSubmit();
+    onSubmit && onSubmit(values);
   };
 
   const getFieldProps = (name: string) => {

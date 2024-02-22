@@ -1,6 +1,6 @@
 'use client';
 
-import { UserInfo } from '@/components/(auth)/RegisterFormView';
+import { UserInfo } from '@/components/(auth)/RegisterForm';
 import useForm, { useFormProps } from '@/hooks/useForm';
 import {
   ChangeEvent,
@@ -27,7 +27,7 @@ export interface FormValue {
   handleSubmit?: (e: FormEvent<HTMLFormElement>) => void;
   getFieldProps?: (name: string) => {
     name: string;
-    value: string | undefined;
+    value: string | boolean | undefined;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   };
 }
