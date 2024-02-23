@@ -1,7 +1,14 @@
 import { UserInfo } from '@/components/(auth)/RegisterForm';
 import { ValidationFunctions } from '@/utils/isValidationCheck';
 
-import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEventHandler,
+  SyntheticEvent,
+  useRef,
+  useState,
+} from 'react';
 
 export interface useFormProps {
   formType: string;
@@ -26,6 +33,8 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const [isValid, setIsValid] = useState(initialValidValue);
   const [isEmpty, setIsEmpty] = useState(initialEmptyValue);
   const [isEnterUserInfo, setIsEnterUserInfo] = useState(false);
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -84,6 +93,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
     isValid,
     isEmpty,
     isEnterUserInfo,
+    formRef,
     handleAllUserInfoCheck,
     handleClickContinue,
     handleChange,
