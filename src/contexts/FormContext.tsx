@@ -28,6 +28,7 @@ export interface FormValue {
   handleClickContinue?: MouseEventHandler<HTMLButtonElement>;
   handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  setIsAllChecked: (isAllChecked: boolean) => void;
   getFieldProps?: (name: string) => {
     name: string;
     value: string | boolean | undefined;
