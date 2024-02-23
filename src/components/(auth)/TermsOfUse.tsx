@@ -1,13 +1,7 @@
 'use client';
 
 import { FormValue, formContext } from '@/contexts/FormContext';
-import {
-  SyntheticEvent,
-  createRef,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { SyntheticEvent, createRef, useContext } from 'react';
 import RequiredAcceptItem from './RequiredAcceptItem';
 
 const STYLE_WRAP = 'mt-4 relative inline-block';
@@ -32,17 +26,17 @@ const TermsOfUse = () => {
   );
 
   const handleCheckedChanged = (e: SyntheticEvent) => {
-    if (!formRef.current) return;
+    if (!formRef?.current) return;
 
     const data = new FormData(formRef.current);
     const targetInput = e.target as HTMLInputElement;
     const selectedCount = data.getAll('select-item-required').length;
 
-    setIsAllChecked(selectedCount === 3 ? true : false);
+    setIsAllChecked?.(selectedCount === 3 ? true : false);
 
     if (targetInput.classList.contains('select-all')) {
       const allChecked = targetInput.checked;
-      setIsAllChecked(allChecked);
+      setIsAllChecked?.(allChecked);
       checkboxRefs.forEach((inputElem) => {
         inputElem.current!.checked = allChecked;
       });

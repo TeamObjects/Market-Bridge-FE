@@ -9,7 +9,6 @@ import {
   ReactNode,
   RefObject,
   createContext,
-  useRef,
 } from 'react';
 
 interface FormContextProps extends useFormProps {
@@ -23,12 +22,12 @@ export interface FormValue {
   isValid?: Record<string, boolean>;
   isEmpty?: Record<string, boolean>;
   isEnterUserInfo?: boolean;
-  formRef: RefObject<HTMLFormElement>;
+  formRef?: RefObject<HTMLFormElement>;
   handleAllUserInfoCheck?: () => void;
   handleClickContinue?: MouseEventHandler<HTMLButtonElement>;
   handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: FormEvent<HTMLFormElement>) => void;
-  setIsAllChecked: (isAllChecked: boolean) => void;
+  setIsAllChecked?: (isAllChecked: boolean) => void;
   getFieldProps?: (name: string) => {
     name: string;
     value: string | boolean | undefined;

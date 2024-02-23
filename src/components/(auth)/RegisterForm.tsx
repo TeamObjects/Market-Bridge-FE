@@ -1,11 +1,11 @@
 'use client';
 
 import { registerUser } from '@/api/authApi';
-import FormContext, { FormValue, formContext } from '@/contexts/FormContext';
+import FormContext from '@/contexts/FormContext';
 import { validationFunctions } from '@/utils/isValidationCheck';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { ReactNode, useContext } from 'react';
+import { ReactNode } from 'react';
 
 export interface UserInfo {
   email: string;
