@@ -5,7 +5,7 @@ import {
   ChangeEvent,
   FormEvent,
   MouseEventHandler,
-  SyntheticEvent,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -33,6 +33,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const [isValid, setIsValid] = useState(initialValidValue);
   const [isEmpty, setIsEmpty] = useState(initialEmptyValue);
   const [isEnterUserInfo, setIsEnterUserInfo] = useState(false);
+  const [isAllChecked, setIsAllChecked] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -74,7 +75,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit && onSubmit(values);
+    onSubmit && onSubmit({ ...values, isAgree: isAllChecked });
   };
 
   const getFieldProps = (name: string) => {
@@ -99,6 +100,8 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
     handleChange,
     handleSubmit,
     getFieldProps,
+    isAllChecked,
+    setIsAllChecked,
   };
 };
 
