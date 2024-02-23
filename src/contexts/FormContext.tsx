@@ -7,7 +7,9 @@ import {
   FormEvent,
   MouseEventHandler,
   ReactNode,
+  RefObject,
   createContext,
+  useRef,
 } from 'react';
 
 interface FormContextProps extends useFormProps {
@@ -21,6 +23,7 @@ export interface FormValue {
   isValid?: Record<string, boolean>;
   isEmpty?: Record<string, boolean>;
   isEnterUserInfo?: boolean;
+  formRef: RefObject<HTMLFormElement>;
   handleAllUserInfoCheck?: () => void;
   handleClickContinue?: MouseEventHandler<HTMLButtonElement>;
   handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -44,7 +47,12 @@ const FormContext = ({
 
   return (
     <formContext.Provider value={formValue}>
-      <form id={id} className={className} onSubmit={formValue.handleSubmit}>
+      <form
+        id={id}
+        ref={formValue.formRef}
+        className={className}
+        onSubmit={formValue.handleSubmit}
+      >
         {children}
       </form>
     </formContext.Provider>

@@ -1,7 +1,8 @@
 'use client';
 
 import { FormValue, formContext } from '@/contexts/FormContext';
-import { useContext } from 'react';
+import { SyntheticEvent, createRef, useContext } from 'react';
+import RequiredAcceptItem from './RequiredAcceptItem';
 
 const STYLE_WRAP = 'mt-4 relative inline-block';
 const STYLE_LABEL = 'flex items-center';
@@ -9,8 +10,41 @@ const STYLE_INPUT = 'mr-2';
 const STYLE_TEXT = 'text-[14px] xs:text-xl';
 const STYLE_CHOOSE = 'ml-[2px] text-xl xs:text-lg text-gray-400';
 
+const REQUIRED_ACCEPT_CONTENTS = [
+  { id: '1', content: '이용약관 동의' },
+  { id: '2', content: '개인정보 수집 및 이용 동의' },
+  { id: '3', content: '본인은 만 14에 이상입니다.' },
+];
+
 const TermsOfUse = () => {
-  const { isEnterUserInfo } = useContext(formContext) as FormValue;
+  const { isEnterUserInfo, formRef } = useContext(formContext) as FormValue;
+
+  const checkboxRefs = REQUIRED_ACCEPT_CONTENTS.map(() =>
+    createRef<HTMLInputElement>(),
+  );
+
+  console.log(checkboxRefs);
+
+  const handleCheckedChanged = (e: SyntheticEvent) => {
+    if (!formRef.current) return;
+
+    const data = new FormData(formRef.current);
+    const targetInput = e.target as HTMLInputElement;
+    const selectedCount = data.getAll('select-item-required').length;
+    console.log(selectedCount);
+    console.log(targetInput);
+
+    if (targetInput.classList.contains('select-all')) {
+      const allChecked = targetInput.checked;
+      checkboxRefs.forEach((inputElem) => {
+        inputElem.current!.checked = allChecked;
+      });
+    } else {
+      const allChecked = selectedCount === REQUIRED_ACCEPT_CONTENTS.length;
+      formRef.current.querySelector<HTMLInputElement>('.select-all')!.checked =
+        allChecked;
+    }
+  };
 
   if (!isEnterUserInfo) return null;
 
@@ -27,7 +61,13 @@ const TermsOfUse = () => {
           <div>
             <div className={STYLE_WRAP}>
               <label htmlFor="all-agree" className={STYLE_LABEL}>
-                <input type="checkbox" id="all-agree" className={STYLE_INPUT} />
+                <input
+                  type="checkbox"
+                  id="all-agree"
+                  name="select-all"
+                  className={`${STYLE_INPUT} select-all`}
+                  onChange={handleCheckedChanged}
+                />
                 <span className="text-[16px] xs:text-2xl">
                   전체 동의합니다.
                 </span>
@@ -37,44 +77,21 @@ const TermsOfUse = () => {
                 이용할 수 있습니다.
               </div>
             </div>
-            <div className={STYLE_WRAP}>
-              <label htmlFor="agree-terms-of-use" className={STYLE_LABEL}>
-                <input
-                  type="checkbox"
-                  id="agree-terms-of-use"
-                  className={STYLE_INPUT}
-                />
-                <span className={STYLE_TEXT}>이용약관 동의</span>
-                <span className={STYLE_CHOOSE}>(필수)</span>
-              </label>
-            </div>
-            <div className={STYLE_WRAP}>
-              <label htmlFor="collect-info-required" className={STYLE_LABEL}>
-                <input
-                  type="checkbox"
-                  id="collect-info-required"
-                  className={STYLE_INPUT}
-                />
-                <span className={STYLE_TEXT}>개인정보 수집 및 이용 동의</span>
-                <span className={STYLE_CHOOSE}>(필수)</span>
-              </label>
-            </div>
-            <div className={STYLE_WRAP}>
-              <label htmlFor="collect-info-choose" className={STYLE_LABEL}>
-                <input
-                  type="checkbox"
-                  id="collect-info-choose"
-                  className={STYLE_INPUT}
-                />
-                <span className={STYLE_TEXT}>개인정보 수집 및 이용 동의</span>
-                <span className={STYLE_CHOOSE}>(선택)</span>
-              </label>
-            </div>
-            <div className={STYLE_WRAP}>
+            {REQUIRED_ACCEPT_CONTENTS.map((item, index) => (
+              <RequiredAcceptItem
+                key={item.id}
+                handleCheckedChanged={handleCheckedChanged}
+                id={item.id}
+                content={item.content}
+                ref={checkboxRefs[index]}
+              />
+            ))}
+            <div className={`${STYLE_WRAP} mb-4`}>
               <label htmlFor="agree-benefits" className={STYLE_LABEL}>
                 <input
                   type="checkbox"
                   id="agree-benefits"
+                  name="select-item-choose"
                   className={STYLE_INPUT}
                 />
                 <span className={STYLE_TEXT}>
@@ -84,21 +101,24 @@ const TermsOfUse = () => {
               </label>
               <div className="flex ml-6 mt-2">
                 <label htmlFor="sms" className={`${STYLE_LABEL} mr-6`}>
-                  <input type="checkbox" id="sms" className={STYLE_INPUT} />
+                  <input
+                    type="checkbox"
+                    id="sms"
+                    name="select-item-choose"
+                    className={STYLE_INPUT}
+                  />
                   <span className={STYLE_TEXT}>SMS</span>
                 </label>
                 <label htmlFor="email" className={STYLE_LABEL}>
-                  <input type="checkbox" id="email" className={STYLE_INPUT} />
+                  <input
+                    type="checkbox"
+                    id="email"
+                    name="select-item-choose"
+                    className={STYLE_INPUT}
+                  />
                   <span className={STYLE_TEXT}>이메일</span>
                 </label>
               </div>
-            </div>
-            <div className={`${STYLE_WRAP} mb-10`}>
-              <label htmlFor="age-check" className={STYLE_LABEL}>
-                <input type="checkbox" id="age-check" className={STYLE_INPUT} />
-                <span className={STYLE_TEXT}>본인은 만 14세 이상입니다.</span>
-                <span className={STYLE_CHOOSE}>(필수)</span>
-              </label>
             </div>
           </div>
         </div>
