@@ -25,6 +25,8 @@ export default function Depth1() {
 
   const isHover = !!hoverNum;
 
+  console.log(hoverNum);
+
   return (
     <div
       className="absolute top-[34px] left-0 flex text-[1.35rem] z-10 bg-white"
@@ -33,8 +35,13 @@ export default function Depth1() {
       <div className="w-48 p-4">
         <ul className={`flex flex-col gap-y-2`}>
           {depth1List.map((menu, idx) => (
-            <li key={menu} onMouseEnter={() => setHoverNum(idx + 1)}>
-              {menu}
+            <li
+              key={menu}
+              onMouseEnter={() => setHoverNum(idx + 1)}
+              className={`${hoverNum === idx + 1 ? 'text-sky-500 flex justify-between font-bold' : ''} transition-all duration-150 cursor-pointer `}
+            >
+              <span>{menu}</span>
+              <span>{hoverNum === idx + 1 ? '▶' : ''}</span>
             </li>
           ))}
         </ul>
