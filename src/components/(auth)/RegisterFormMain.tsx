@@ -1,13 +1,28 @@
 'use client';
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AuthInput from './AuthInput';
 import ValidationMessage from './ValidationMessage';
 import ValidationMessages from './ValidationMessages';
 import { FormValue, formContext } from '@/contexts/FormContext';
+import { checkDuplicateEmail } from '@/api/authApi';
 
 const RegisterFormMain = () => {
-  const { isEnterUserInfo } = useContext(formContext) as FormValue;
+  const [isDuplicateCheck, setIsDuplicateCheck] = useState(false);
+  const { isEnterUserInfo, values } = useContext(formContext) as FormValue;
+
+  const duplicateEmailCheck = async (email: string | undefined) => {
+    const response = await checkDuplicateEmail(email);
+    const {
+      data: { checked },
+    } = response;
+
+    setIsDuplicateCheck(checked);
+  };
+
+  useEffect(() => {
+    duplicateEmailCheck(values?.email);
+  }, [values]);
 
   if (isEnterUserInfo) return null;
 
@@ -24,6 +39,9 @@ const RegisterFormMain = () => {
           <ValidationMessages name="email">
             <ValidationMessage text="이메일을 형식에 맞게 입력해주세요." />
           </ValidationMessages>
+          {isDuplicateCheck && (
+            <ValidationMessage text="이미 가입된 이메일입니다." />
+          )}
           <AuthInput
             type="password"
             name="password"

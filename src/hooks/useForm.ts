@@ -5,7 +5,6 @@ import {
   ChangeEvent,
   FormEvent,
   MouseEventHandler,
-  useEffect,
   useRef,
   useState,
 } from 'react';

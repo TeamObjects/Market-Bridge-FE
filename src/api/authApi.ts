@@ -30,3 +30,11 @@ export const loginUser = async (loginUserInfo: LoginUserInfo) => {
 
   return response.json();
 };
+
+export const checkDuplicateEmail = async (email: string | undefined) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/email-check?email=${email}`,
+  );
+
+  return response.json();
+};
