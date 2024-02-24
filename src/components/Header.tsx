@@ -4,12 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
-import {
-  BridgeLogo,
-  Category,
-  Mypage,
-  ShoppingBasket,
-} from '../../public/svgs';
+import { BridgeLogo, Mypage, ShoppingBasket } from '../../public/svgs';
+import CategoryIcon from '@/components/(header)/CategoryIcon';
 
 const EXCLUSION_PATHS = [
   '/login',
@@ -24,7 +20,7 @@ const Header: React.FC = () => {
   if (EXCLUSION_PATHS.includes(path)) return null;
 
   return (
-    <header className="flex flex-row w-[100%] h-[10rem] text-[1.6rem]">
+    <header className="flex flex-row w-[100%] h-[10rem] text-[1.6rem] items-center">
       <div className="flex w-[25%] justify-center items-center">
         <Image
           src={BridgeLogo}
@@ -33,10 +29,7 @@ const Header: React.FC = () => {
         />
       </div>
       <div className="flex w-[30%]">
-        <div className="flex justify-center items-center cursor-pointer flex-grow">
-          <Image src={Category} alt="카테고리" />
-          <p>카테코리</p>
-        </div>
+        <CategoryIcon />
         <Link href="/" className="flex justify-center items-center flex-grow">
           컬리추천
         </Link>
