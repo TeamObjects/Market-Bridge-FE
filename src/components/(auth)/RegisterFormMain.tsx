@@ -6,23 +6,24 @@ import ValidationMessage from './ValidationMessage';
 import ValidationMessages from './ValidationMessages';
 import { FormValue, formContext } from '@/contexts/FormContext';
 import { checkDuplicateEmail } from '@/api/authApi';
+import useDebounce from '@/hooks/useDebounce';
 
 const RegisterFormMain = () => {
   const [isDuplicateCheck, setIsDuplicateCheck] = useState(false);
   const { isEnterUserInfo, values } = useContext(formContext) as FormValue;
 
-  const duplicateEmailCheck = async (email: string | undefined) => {
-    const response = await checkDuplicateEmail(email);
-    const {
-      data: { checked },
-    } = response;
+  const debouncedEmail = useDebounce(values?.email, 300);
 
-    setIsDuplicateCheck(checked);
+  const duplicateEmailCheck = async (email: string | undefined) => {
+    if (email) {
+      const response = await checkDuplicateEmail(email);
+      setIsDuplicateCheck(response.data.checked);
+    }
   };
 
   useEffect(() => {
-    duplicateEmailCheck(values?.email);
-  }, [values]);
+    duplicateEmailCheck(debouncedEmail);
+  }, [debouncedEmail]);
 
   if (isEnterUserInfo) return null;
 
