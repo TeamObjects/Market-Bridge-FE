@@ -5,7 +5,7 @@ import Button from '../Button';
 import { FormValue, formContext } from '@/contexts/FormContext';
 
 const RegisterFormButtons = () => {
-  const { isEnterUserInfo, handleClickContinue, values } = useContext(
+  const { isEnterUserInfo, handleClickContinue } = useContext(
     formContext,
   ) as FormValue;
 
