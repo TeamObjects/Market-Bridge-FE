@@ -22,6 +22,7 @@ const FindAuthButton = () => {
 
   return (
     <Button
+      type="submit"
       text={
         path === '/login/findPassword/changePassword'
           ? '확인'

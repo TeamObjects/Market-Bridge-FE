@@ -38,3 +38,14 @@ export const checkDuplicateEmail = async (email: string | undefined) => {
 
   return response.json();
 };
+
+export const findId = async (
+  name: string | undefined,
+  phoneNo: string | undefined,
+) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/email-find?name=${name}&phoneNo=${phoneNo}`,
+  );
+
+  return response.json();
+};
