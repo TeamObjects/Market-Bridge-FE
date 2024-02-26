@@ -16,9 +16,9 @@ const FindPassword = () => {
           </>
         }
       >
-        <FormContext id="findPassword-form" formType="findPassword">
-          <FindAuthForm />
-        </FormContext>
+        <FindAuthForm>
+          <div>d</div>
+        </FindAuthForm>
       </FindAuthPage>
       <ChangePasswordCompleteModal />
     </>

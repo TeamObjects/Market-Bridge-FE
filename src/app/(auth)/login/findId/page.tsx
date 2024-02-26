@@ -1,10 +1,9 @@
 import FindAuthForm from '@/components/(auth)/(findAuth)/FindAuthForm';
+import FindAuthFormMain from '@/components/(auth)/(findAuth)/FindAuthFormMain';
 import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import FoundAuthPage from '@/components/(auth)/(findAuth)/FoundAuthPage';
 import FoundIdHeader from '@/components/(auth)/(findAuth)/FoundIdHeader';
 import AuthHeader from '@/components/(auth)/AuthHeader';
-
-import FormContext from '@/contexts/FormContext';
 
 const FindId = () => {
   return (
@@ -17,9 +16,9 @@ const FindId = () => {
           </>
         }
       >
-        <FormContext id="findId-form" formType="findId">
-          <FindAuthForm />
-        </FormContext>
+        <FindAuthForm>
+          <FindAuthFormMain />
+        </FindAuthForm>
       </FindAuthPage>
       <FoundAuthPage header={<FoundIdHeader />} />
     </>
