@@ -1,7 +1,9 @@
 'use client';
 
 import { UserInfo } from '@/components/(auth)/RegisterForm';
+
 import useForm, { useFormProps } from '@/hooks/useForm';
+
 import {
   ChangeEvent,
   FormEvent,

@@ -1,5 +1,5 @@
-import LoginFormButtons from './LoginFormButtons';
-import LoginFormMain from './LoginFormMain';
+import LoginFormButtons from '@/components/(auth)/LoginFormButtons';
+import LoginFormMain from '@/components/(auth)/LoginFormMain';
 
 const LoginFormView = () => {
   return (

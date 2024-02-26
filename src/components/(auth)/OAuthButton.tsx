@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import { GoogleLogo, KakaoLogo } from '../../../public/svgs';
+
+import Image from 'next/image';
 
 const STYLE_OAUTH_BUTTON =
   'flex justify-center items-center w-[40px] h-[40px] xs:w-[37x] xs:h-[37px] border-[1px] border-gray-500 rounded-full';

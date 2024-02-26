@@ -1,8 +1,9 @@
 'use client';
 
+import FindAuthButton from '@/components/(auth)/(findAuth)/FindAuthButton';
+import FindAuthInput from '@/components/(auth)/(findAuth)/FindAuthInput';
+
 import { usePathname } from 'next/navigation';
-import FindAuthButton from './FindAuthButton';
-import FindAuthInput from './FindAuthInput';
 
 const FindAuthForm = () => {
   const path = usePathname();

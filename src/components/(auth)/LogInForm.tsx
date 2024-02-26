@@ -1,13 +1,17 @@
 'use client';
 
+import { UserInfo } from '@/components/(auth)/RegisterForm';
+
 import { loginUser } from '@/api/authApi';
 import FormContext from '@/contexts/FormContext';
 import { validationFunctions } from '@/utils/isValidationCheck';
-import { useMutation } from '@tanstack/react-query';
-import { UserInfo } from '@/components/(auth)/RegisterForm';
-import { ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
 import { setLocalToken } from '@/utils/localToken';
+
+import { useMutation } from '@tanstack/react-query';
+
+import { useRouter } from 'next/navigation';
+
+import { ReactNode } from 'react';
 
 export type LoginUserInfo = {
   email: UserInfo['email'];

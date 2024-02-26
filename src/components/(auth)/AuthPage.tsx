@@ -1,6 +1,7 @@
+import AuthSection from '@/components/(auth)/AuthSection';
+import WrapperPage from '@/components/(auth)/WrapperPage';
+
 import { ReactNode } from 'react';
-import AuthSection from './AuthSection';
-import WrapperPage from './WrapperPage';
 
 export interface PageComponentProps {
   header: ReactNode;

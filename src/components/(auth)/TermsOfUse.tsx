@@ -1,8 +1,10 @@
 'use client';
 
+import RequiredAcceptItem from '@/components/(auth)/RequiredAcceptItem';
+
 import { FormValue, formContext } from '@/contexts/FormContext';
+
 import { SyntheticEvent, createRef, useContext } from 'react';
-import RequiredAcceptItem from './RequiredAcceptItem';
 
 const STYLE_WRAP = 'mt-4 relative inline-block';
 const STYLE_LABEL = 'flex items-center';

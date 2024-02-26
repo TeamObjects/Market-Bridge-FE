@@ -1,6 +1,7 @@
 import ChangePasswordForm from '@/components/(auth)/(findAuth)/ChangePasswordForm';
 import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import AuthHeader from '@/components/(auth)/AuthHeader';
+
 import FormContext from '@/contexts/FormContext';
 
 const ChangePassword = () => {

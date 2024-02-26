@@ -1,4 +1,5 @@
-import AuthPage from '../AuthPage';
+import AuthPage from '@/components/(auth)/AuthPage';
+
 import { LuMail } from 'react-icons/lu';
 
 const ResetPasswordModal = () => {

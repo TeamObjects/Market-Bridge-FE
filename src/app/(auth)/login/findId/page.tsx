@@ -3,6 +3,7 @@ import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import FoundAuthPage from '@/components/(auth)/(findAuth)/FoundAuthPage';
 import FoundIdHeader from '@/components/(auth)/(findAuth)/FoundIdHeader';
 import AuthHeader from '@/components/(auth)/AuthHeader';
+
 import FormContext from '@/contexts/FormContext';
 
 const FindId = () => {
