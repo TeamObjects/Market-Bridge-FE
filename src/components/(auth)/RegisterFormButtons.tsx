@@ -1,8 +1,10 @@
 'use client';
 
-import { useContext } from 'react';
-import Button from '../Button';
+import Button from '@/components/Button';
+
 import { FormValue, formContext } from '@/contexts/FormContext';
+
+import { useContext } from 'react';
 
 const RegisterFormButtons = () => {
   const { isEnterUserInfo, handleClickContinue } = useContext(

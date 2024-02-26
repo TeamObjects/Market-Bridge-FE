@@ -2,6 +2,7 @@ import ChangePasswordCompleteModal from '@/components/(auth)/(findAuth)/ChangePa
 import FindAuthForm from '@/components/(auth)/(findAuth)/FindAuthForm';
 import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import AuthHeader from '@/components/(auth)/AuthHeader';
+
 import FormContext from '@/contexts/FormContext';
 
 const FindPassword = () => {

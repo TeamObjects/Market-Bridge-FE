@@ -1,7 +1,8 @@
+import RegisterFormButtons from '@/components/(auth)/RegisterFormButtons';
+import RegisterFormMainView from '@/components/(auth)/RegisterFormMain';
+import TermsOfUse from '@/components/(auth)/TermsOfUse';
+
 import { FormValue } from '@/contexts/FormContext';
-import RegisterFormButtons from './RegisterFormButtons';
-import RegisterFormMainView from './RegisterFormMain';
-import TermsOfUse from './TermsOfUse';
 
 const RegisterFormView = ({}: FormValue) => {
   return (

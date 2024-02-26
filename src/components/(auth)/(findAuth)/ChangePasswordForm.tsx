@@ -1,5 +1,5 @@
-import FindAuthButton from './FindAuthButton';
-import FindAuthInput from './FindAuthInput';
+import FindAuthButton from '@/components/(auth)/(findAuth)/FindAuthButton';
+import FindAuthInput from '@/components/(auth)/(findAuth)/FindAuthInput';
 
 const ChangePasswordForm = () => {
   return (

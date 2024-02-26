@@ -1,9 +1,8 @@
 'use client';
 
 import Button, { STYLE_BUTTON_DEFAULT } from '@/components/Button';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+
+import { usePathname, useRouter } from 'next/navigation';
 
 const FindAuthButton = () => {
   const router = useRouter();

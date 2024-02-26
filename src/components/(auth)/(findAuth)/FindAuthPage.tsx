@@ -1,7 +1,8 @@
 'use client';
 
+import AuthPage, { PageComponentProps } from '@/components/(auth)/AuthPage';
+
 import { useSearchParams } from 'next/navigation';
-import AuthPage, { PageComponentProps } from '../AuthPage';
 
 const FindAuthPage = ({ header, children }: PageComponentProps) => {
   const searchParams = useSearchParams();
