@@ -49,3 +49,29 @@ export const findId = async (
 
   return response.json();
 };
+
+export const findPassword = async (
+  name: string | undefined,
+  email: string | undefined,
+) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/password-find?name=${name}&email=${email}`,
+  );
+
+  return response.json();
+};
+
+export const resetPassword = async (memberId: number, password: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/password-reset`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ memberId, password }),
+    },
+  );
+
+  return response.json();
+};
