@@ -5,6 +5,7 @@ const authState = atom({
   default: {
     isLoggedIn: false,
     foundId: '',
+    memberId: 0,
   },
 });
 

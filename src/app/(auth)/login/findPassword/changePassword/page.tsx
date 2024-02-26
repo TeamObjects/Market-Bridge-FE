@@ -1,8 +1,7 @@
 import ChangePasswordForm from '@/components/(auth)/(findAuth)/ChangePasswordForm';
+import FindAuthForm from '@/components/(auth)/(findAuth)/FindAuthForm';
 import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import AuthHeader from '@/components/(auth)/AuthHeader';
-
-import FormContext from '@/contexts/FormContext';
 
 const ChangePassword = () => {
   return (
@@ -15,9 +14,9 @@ const ChangePassword = () => {
           </>
         }
       >
-        <FormContext id="findPassword-form" formType="findPassword">
+        <FindAuthForm>
           <ChangePasswordForm />
-        </FormContext>
+        </FindAuthForm>
       </FindAuthPage>
     </>
   );

@@ -1,7 +1,6 @@
 'use client';
 
 import FindAuthButton from './FindAuthButton';
-import FindAuthForm from './FindAuthForm';
 import FindAuthInput from './FindAuthInput';
 
 import { usePathname } from 'next/navigation';
@@ -21,7 +20,11 @@ const FindAuthFormMain = () => {
         label={path === '/login/findId' ? '휴대폰 번호' : '이메일'}
         type="text"
         name={path === '/login/findId' ? 'phoneNo' : 'email'}
-        placeholder="휴대폰 번호를 입력해주세요."
+        placeholder={
+          path === '/login/findId'
+            ? '휴대폰 번호를 입력해주세요.'
+            : '이메일을 입력해주세요.'
+        }
       />
       <FindAuthButton />
     </>

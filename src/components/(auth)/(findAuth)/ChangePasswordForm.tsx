@@ -12,7 +12,7 @@ const ChangePasswordForm = () => {
       />
       <FindAuthInput
         label="비밀번호 재입력"
-        type="text"
+        type="password"
         name="rePassword"
         placeholder="휴대폰 번호를 입력해주세요."
       />

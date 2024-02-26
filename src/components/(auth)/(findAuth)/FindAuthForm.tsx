@@ -1,29 +1,60 @@
 'use client';
 
-import { findId } from '@/api/authApi';
+import { findId, findPassword, resetPassword } from '@/api/authApi';
 import { UserInfo } from '@/components/(auth)/RegisterForm';
 import FormContext from '@/contexts/FormContext';
 import authState from '@/recoil/authAtom';
 
-import { ReactNode } from 'react';
 import { useRecoilState } from 'recoil';
 
+import { ReactNode } from 'react';
+
+import { usePathname, useRouter } from 'next/navigation';
 interface FindAuthFormProps {
   children: ReactNode;
 }
 
 const FindAuthForm = ({ children }: FindAuthFormProps) => {
-  const [_, setFoundId] = useRecoilState(authState);
+  const [state, setState] = useRecoilState(authState);
+
+  const router = useRouter();
+  const path = usePathname();
 
   const handleFindAuthSubmit = async (values: UserInfo) => {
-    const { name, phoneNo } = values;
+    const { name, phoneNo, email, password } = values;
 
-    const response = await findId(name, phoneNo);
+    if (path === '/login/findId') {
+      const response = await findId(name, phoneNo);
 
-    const {
-      data: { email },
-    } = response;
-    setFoundId((prev) => ({ ...prev, foundId: email }));
+      if (response.code === 200) {
+        const {
+          data: { email: foundId },
+        } = response;
+        setState((prev) => ({ ...prev, foundId }));
+        router.push('/login/findId?complete=id');
+      }
+    }
+
+    if (path === '/login/findPassword') {
+      const response = await findPassword(name, email);
+
+      if (response.code === 200) {
+        const {
+          data: { memberId },
+        } = response;
+
+        setState((prev) => ({ ...prev, memberId }));
+        router.push('/login/findPassword/changePassword');
+      }
+    }
+
+    if (path === '/login/findPassword/changePassword') {
+      const response = await resetPassword(state.memberId, password);
+
+      if (response.code === 200) {
+        router.push('/login/findPassword?complete=password');
+      }
+    }
   };
 
   return (

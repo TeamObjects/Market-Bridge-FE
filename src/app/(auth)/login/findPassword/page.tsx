@@ -1,9 +1,8 @@
 import ChangePasswordCompleteModal from '@/components/(auth)/(findAuth)/ChangePasswordCompleteModal';
 import FindAuthForm from '@/components/(auth)/(findAuth)/FindAuthForm';
+import FindAuthFormMain from '@/components/(auth)/(findAuth)/FindAuthFormMain';
 import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import AuthHeader from '@/components/(auth)/AuthHeader';
-
-import FormContext from '@/contexts/FormContext';
 
 const FindPassword = () => {
   return (
@@ -12,12 +11,12 @@ const FindPassword = () => {
         header={
           <>
             <AuthHeader />
-            <h1 className="text-center text-3xl my-14">비밀번호 찾기</h1>
+            <h1 className="text-center text-3xl my-14">비밀번호 재설정</h1>
           </>
         }
       >
         <FindAuthForm>
-          <div>d</div>
+          <FindAuthFormMain />
         </FindAuthForm>
       </FindAuthPage>
       <ChangePasswordCompleteModal />
