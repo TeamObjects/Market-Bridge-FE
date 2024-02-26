@@ -1,24 +1,19 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
 import FindAuthButton from './FindAuthButton';
 import FindAuthInput from './FindAuthInput';
 
-const FindAuthForm = () => {
-  const path = usePathname();
-
+const ChangePasswordForm = () => {
   return (
     <>
       <FindAuthInput
-        label="이름"
-        type="text"
-        name="name"
+        label="비밀번호"
+        type="password"
+        name="password"
         placeholder="이름을 입력해주세요."
       />
       <FindAuthInput
-        label={path === '/login/findId' ? '휴대폰 번호' : '이메일'}
+        label="비밀번호 재입력"
         type="text"
-        name="phone"
+        name="rePassword"
         placeholder="휴대폰 번호를 입력해주세요."
       />
       <FindAuthButton />
@@ -26,4 +21,4 @@ const FindAuthForm = () => {
   );
 };
 
-export default FindAuthForm;
+export default ChangePasswordForm;

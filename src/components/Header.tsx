@@ -16,6 +16,7 @@ const EXCLUSION_PATHS = [
   '/register',
   '/login/findId',
   '/login/findPassword',
+  '/login/findPassword/changePassword',
 ];
 
 const Header: React.FC = () => {

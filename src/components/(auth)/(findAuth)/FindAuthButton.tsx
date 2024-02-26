@@ -8,19 +8,28 @@ import React from 'react';
 const FindAuthButton = () => {
   const router = useRouter();
   const path = usePathname();
-  const pathCheck = path === '/login/findPassword';
+  const pathFindPassword = path === '/login/findPassword';
+  const pathChangePassword = path === '/login/findPassword/changePassword';
 
   const handleButtonClick = () => {
     router.push(
-      pathCheck
-        ? '/login/findPassword?complete=password'
-        : '/login/findId?complete=id',
+      pathFindPassword
+        ? '/login/findPassword/changePassword'
+        : pathChangePassword
+          ? '/login/findPassword?complete=password'
+          : '/login/findId?complete=id',
     );
   };
 
   return (
     <Button
-      text="인증번호 받기"
+      text={
+        path === '/login/findPassword/changePassword'
+          ? '확인'
+          : path === '/login/findId'
+            ? '아이디 찾기'
+            : '비밀번호 재설정하기'
+      }
       style={`${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
       onClick={handleButtonClick}
     />

@@ -8,7 +8,6 @@ const FoundIdMain = () => {
       </div>
       <div className="flex-auto">
         <h3 className="text-2xl text-[#011B5B] mb-2">DataLiteracy</h3>
-        <p className="text-gray-500">가입일 2021.11.03</p>
       </div>
     </div>
   );
