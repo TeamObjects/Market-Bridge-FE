@@ -6,7 +6,7 @@ interface AlertProps {
   title: React.ReactNode;
   description?: React.ReactNode;
   buttonLabel?: string | undefined;
-  onButtonClick: () => void;
+  onButtonClick?: () => void;
 }
 
 const STYLE_ALERT_CONTAINER =
