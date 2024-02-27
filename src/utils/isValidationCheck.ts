@@ -6,12 +6,7 @@ export const isPhoneCheck = (value: string) => {
   return false;
 };
 
-export const isEmailCheck = (value: string) => {
-  if (/^.+@.+\..+$/.test(value)) {
-    return true;
-  }
-  return false;
-};
+export const isEmailCheck = (value: string) => /^.+@.+\..+$/.test(value);
 
 export const isNameCheck = (value: string) => {
   const regex = /^[가-힣a-zA-Z]+$/;
@@ -32,12 +27,7 @@ const isSequentialOrSame = (password: string) => {
       return true;
     }
 
-    // 연속되는 숫자인 경우 (예: 123, 456)
-    if (current + 1 === next && next + 1 === next2) {
-      return true;
-    }
-
-    // 연속되는 알파벳인 경우 (예: abc, def)
+    // 연속되는 숫자/알파벳인 경우 (예: 123, 456, abc, def)
     if (current + 1 === next && next + 1 === next2) {
       return true;
     }
