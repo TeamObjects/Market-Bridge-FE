@@ -4,6 +4,7 @@ interface ButtonProps {
   text: string | undefined;
   type?: 'button' | 'submit' | 'reset' | undefined;
   style?: string;
+  disabled?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -14,10 +15,11 @@ const Button = ({
   text,
   type = 'button',
   style = STYLE_BUTTON_DEFAULT,
+  disabled = false,
   onClick,
 }: ButtonProps) => {
   return (
-    <button type={type} className={style} onClick={onClick}>
+    <button type={type} className={style} onClick={onClick} disabled={disabled}>
       {text}
     </button>
   );

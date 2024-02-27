@@ -34,6 +34,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const [isEmpty, setIsEmpty] = useState(initialEmptyValue);
   const [isEnterUserInfo, setIsEnterUserInfo] = useState(false);
   const [isAllChecked, setIsAllChecked] = useState(false);
+  const [isResetPasswordCheck, setIsResetPasswordCheck] = useState(false);
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -102,6 +103,8 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
     getFieldProps,
     isAllChecked,
     setIsAllChecked,
+    isResetPasswordCheck,
+    setIsResetPasswordCheck,
   };
 };
 
