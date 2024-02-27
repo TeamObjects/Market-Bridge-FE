@@ -1,4 +1,4 @@
-import AuthInput from '../AuthInput';
+import AuthInput from '@/components/(auth)/AuthInput';
 
 interface FindAuthInputProps {
   label: string;

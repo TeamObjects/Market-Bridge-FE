@@ -1,9 +1,10 @@
 'use client';
 
+import AuthPage from '@/components/(auth)/AuthPage';
 import Button from '@/components/Button';
+
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import AuthPage from '../AuthPage';
 
 const ChangePasswordCompleteModal = () => {
   const searchParams = useSearchParams();

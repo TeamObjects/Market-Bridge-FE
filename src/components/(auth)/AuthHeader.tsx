@@ -1,5 +1,6 @@
-import Image from 'next/image';
 import { BridgeLogo } from '../../../public/svgs';
+
+import Image from 'next/image';
 import Link from 'next/link';
 
 const AuthHeader = () => {

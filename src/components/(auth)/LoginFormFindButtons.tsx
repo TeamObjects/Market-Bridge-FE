@@ -1,7 +1,8 @@
 'use client';
 
+import Button from '@/components/Button';
+
 import Link from 'next/link';
-import Button from '../Button';
 
 const STYLE_FIND_AUTH = 'text-[#011B5B]';
 

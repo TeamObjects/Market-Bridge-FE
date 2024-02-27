@@ -1,12 +1,14 @@
 'use client';
 
-import { useContext, useEffect, useState } from 'react';
-import AuthInput from './AuthInput';
-import ValidationMessage from './ValidationMessage';
-import ValidationMessages from './ValidationMessages';
-import { FormValue, formContext } from '@/contexts/FormContext';
+import AuthInput from '@/components/(auth)/AuthInput';
+import ValidationMessage from '@/components/(auth)/ValidationMessage';
+import ValidationMessages from '@/components/(auth)/ValidationMessages';
+
 import { checkDuplicateEmail } from '@/api/authApi';
+import { FormValue, formContext } from '@/contexts/FormContext';
 import useDebounce from '@/hooks/useDebounce';
+
+import { useContext, useEffect, useState } from 'react';
 
 const RegisterFormMain = () => {
   const [isDuplicateCheck, setIsDuplicateCheck] = useState(false);

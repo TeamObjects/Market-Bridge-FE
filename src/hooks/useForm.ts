@@ -1,4 +1,5 @@
 import { UserInfo } from '@/components/(auth)/RegisterForm';
+
 import { ValidationFunctions } from '@/utils/isValidationCheck';
 
 import {
@@ -59,7 +60,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
       const isEmailAndPasswordEntered =
         values.email !== '' && values.password !== '';
       setIsEnterUserInfo(isEmailAndPasswordEntered);
-    } else {
+    } else if (formType === 'register') {
       const isEnteredAllUserInfo = Object.values(values).every(
         (value) => value !== '',
       );

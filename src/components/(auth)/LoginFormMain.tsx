@@ -1,8 +1,7 @@
-import React from 'react';
-import AuthInput from './AuthInput';
-import ValidationMessages from './ValidationMessages';
-import ValidationMessage from './ValidationMessage';
-import LoginFormButtons from './LoginFormFindButtons';
+import AuthInput from '@/components/(auth)/AuthInput';
+import LoginFormButtons from '@/components/(auth)/LoginFormFindButtons';
+import ValidationMessage from '@/components/(auth)/ValidationMessage';
+import ValidationMessages from '@/components/(auth)/ValidationMessages';
 
 const LoginFormMain = () => {
   return (
