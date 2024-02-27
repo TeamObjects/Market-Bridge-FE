@@ -10,6 +10,7 @@ import { useRecoilState } from 'recoil';
 import { ReactNode } from 'react';
 
 import { usePathname, useRouter } from 'next/navigation';
+import useAlertContext from '@/hooks/useAlertContext';
 interface FindAuthFormProps {
   children: ReactNode;
 }
@@ -17,8 +18,27 @@ interface FindAuthFormProps {
 const FindAuthForm = ({ children }: FindAuthFormProps) => {
   const [state, setState] = useRecoilState(authState);
 
+  const { open } = useAlertContext();
+
   const router = useRouter();
   const path = usePathname();
+
+  const openAlert = (
+    code: number,
+    message: string,
+    errorCode: string,
+    description: string,
+  ) => {
+    if (code === 400) {
+      open({
+        title: message,
+        description,
+        onButtonClick: () => {
+          console.error(errorCode);
+        },
+      });
+    }
+  };
 
   const handleFindAuthSubmit = async (values: UserInfo) => {
     const { name, phoneNo, email, password } = values;
@@ -33,6 +53,13 @@ const FindAuthForm = ({ children }: FindAuthFormProps) => {
         setState((prev) => ({ ...prev, foundId }));
         router.push('/login/findId?complete=id');
       }
+
+      openAlert(
+        response.code,
+        response.message,
+        response.errorCode,
+        '이름이나 휴대폰 정보를 확인해주세요.',
+      );
     }
 
     if (path === '/login/findPassword') {
@@ -46,6 +73,13 @@ const FindAuthForm = ({ children }: FindAuthFormProps) => {
         setState((prev) => ({ ...prev, memberId }));
         router.push('/login/findPassword/changePassword');
       }
+
+      openAlert(
+        response.code,
+        response.message,
+        response.errorCode,
+        '이름이나 이메일 정보를 확인해주세요.',
+      );
     }
 
     if (path === '/login/findPassword/changePassword') {

@@ -21,11 +21,7 @@ export type LoginUserInfo = {
 
 const LogInForm = ({ children }: { children: ReactNode }) => {
   const { open } = useAlertContext();
-  const {
-    mutate: login,
-    isError,
-    error,
-  } = useMutation({
+  const { mutate: login } = useMutation({
     mutationFn: loginUser,
     onSuccess: ({ code, data: { accessToken } }) => {
       if (code === 200) {
@@ -36,7 +32,6 @@ const LogInForm = ({ children }: { children: ReactNode }) => {
     onError: (error) => {
       open({
         title: '아이디나 비밀번호가 잘못 입력되었습니다.',
-        buttonLabel: '확인',
         onButtonClick: () => {
           console.error(error);
         },
