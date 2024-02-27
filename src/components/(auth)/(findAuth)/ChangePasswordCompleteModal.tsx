@@ -1,7 +1,7 @@
 'use client';
 
 import AuthPage from '@/components/(auth)/AuthPage';
-import Button from '@/components/Button';
+import Button from '@/components/shared/Button';
 
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';

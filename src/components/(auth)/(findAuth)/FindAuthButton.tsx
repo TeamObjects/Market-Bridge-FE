@@ -1,6 +1,6 @@
 'use client';
 
-import Button, { STYLE_BUTTON_DEFAULT } from '@/components/Button';
+import Button, { STYLE_BUTTON_DEFAULT } from '@/components/shared/Button';
 
 import { usePathname } from 'next/navigation';
 

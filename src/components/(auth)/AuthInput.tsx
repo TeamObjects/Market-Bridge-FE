@@ -32,6 +32,7 @@ const AuthInput = ({
       placeholder={placeholder}
       className={style}
       onChange={handleChange}
+      required
     />
   );
 };
