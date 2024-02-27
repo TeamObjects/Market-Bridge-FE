@@ -2,6 +2,7 @@
 
 import { registerUser } from '@/api/authApi';
 import FormContext from '@/contexts/FormContext';
+import useAlertContext from '@/hooks/useAlertContext';
 import { validationFunctions } from '@/utils/isValidationCheck';
 
 import { useMutation } from '@tanstack/react-query';
@@ -21,6 +22,8 @@ export interface UserInfo {
 
 const RegisterForm = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
+  const { open } = useAlertContext();
+
   const {
     mutate: register,
     isError,
@@ -37,8 +40,11 @@ const RegisterForm = ({ children }: { children: ReactNode }) => {
   const handleRegisterSubmit = (values: UserInfo) => {
     const { isAgree } = values;
 
-    if (!isAgree) alert('필수 동의 사항에 체크해주세요!');
-    else {
+    if (!isAgree) {
+      open({
+        title: '필수 동의사항에 체크해주세요.',
+      });
+    } else {
       register(values);
     }
   };

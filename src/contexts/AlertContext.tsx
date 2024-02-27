@@ -49,7 +49,7 @@ export const AlertContextProvider = ({
         ...options,
         onButtonClick: () => {
           close();
-          onButtonClick();
+          onButtonClick && onButtonClick();
         },
         open: true,
       });
