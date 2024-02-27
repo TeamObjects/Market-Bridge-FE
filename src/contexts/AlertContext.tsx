@@ -1,7 +1,6 @@
 'use client';
 
 import Alert from '@/components/shared/Alert';
-
 import {
   ComponentProps,
   ReactNode,
@@ -9,6 +8,7 @@ import {
   useCallback,
   useMemo,
   useState,
+  useEffect,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -36,8 +36,12 @@ export const AlertContextProvider = ({
   children,
 }: AlertContextProviderProps) => {
   const [alertState, setAlertState] = useState(defaultValues);
+  const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
 
-  const $portal_root = document.getElementById('root-portal');
+  useEffect(() => {
+    const $portal_root = document.getElementById('root-portal');
+    setPortalRoot($portal_root);
+  }, []);
 
   const close = useCallback(() => {
     setAlertState(defaultValues);
@@ -49,7 +53,7 @@ export const AlertContextProvider = ({
         ...options,
         onButtonClick: () => {
           close();
-          onButtonClick();
+          if (onButtonClick) onButtonClick();
         },
         open: true,
       });
@@ -61,10 +65,8 @@ export const AlertContextProvider = ({
 
   return (
     <AlertContext.Provider value={values}>
-      {children}{' '}
-      {$portal_root != null
-        ? createPortal(<Alert {...alertState} />, $portal_root)
-        : null}
+      {children}
+      {portalRoot ? createPortal(<Alert {...alertState} />, portalRoot) : null}
     </AlertContext.Provider>
   );
 };
