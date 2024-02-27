@@ -19,7 +19,7 @@ const Alert = ({
   open,
   title,
   description,
-  buttonLabel,
+  buttonLabel = '확인',
   onButtonClick,
 }: AlertProps) => {
   if (open === false) {
@@ -29,9 +29,11 @@ const Alert = ({
   return (
     <BackDrop>
       <section className={STYLE_ALERT_CONTAINER}>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center text-center">
           <h3 className="text-2xl my-10">{title}</h3>
-          {description ? <p>{description}</p> : null}
+          {description ? (
+            <p className="text-[13px] mb-10">{description}</p>
+          ) : null}
           <div className="flex">
             <Button
               text={buttonLabel}
