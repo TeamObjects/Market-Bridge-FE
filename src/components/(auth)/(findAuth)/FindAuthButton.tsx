@@ -1,11 +1,17 @@
 'use client';
 
 import Button, { STYLE_BUTTON_DEFAULT } from '@/components/shared/Button';
+import { FormValue, formContext } from '@/contexts/FormContext';
 
 import { usePathname } from 'next/navigation';
+import { useContext } from 'react';
 
 const FindAuthButton = () => {
   const path = usePathname();
+
+  const { isResetPasswordCheck } = useContext(formContext) as FormValue;
+
+  console.log(isResetPasswordCheck);
 
   return (
     <>
@@ -27,7 +33,10 @@ const FindAuthButton = () => {
         <Button
           type="submit"
           text="확인"
-          style={`${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
+          style={`${
+            isResetPasswordCheck ? 'opacity-50 cursor-not-allowed' : ''
+          } ${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
+          disabled={isResetPasswordCheck}
         />
       )}
     </>

@@ -24,6 +24,8 @@ export interface FormValue {
   isValid?: Record<string, boolean>;
   isEmpty?: Record<string, boolean>;
   isEnterUserInfo?: boolean;
+  isResetPasswordCheck?: boolean;
+  setIsResetPasswordCheck?: (isResetPasswordCheck: boolean) => void;
   formRef?: RefObject<HTMLFormElement>;
   handleAllUserInfoCheck?: () => void;
   handleClickContinue?: MouseEventHandler<HTMLButtonElement>;
