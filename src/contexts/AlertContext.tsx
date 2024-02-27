@@ -53,7 +53,7 @@ export const AlertContextProvider = ({
         ...options,
         onButtonClick: () => {
           close();
-          if (onButtonClick) onButtonClick();
+          onButtonClick && onButtonClick();
         },
         open: true,
       });
