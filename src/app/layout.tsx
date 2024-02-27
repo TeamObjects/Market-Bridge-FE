@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
-import Header from '@/components/Header';
+import Header from '@/components/shared/Header';
 import './globals.css';
 import Providers from '@/react-query/Providers';
 import RecoilRootProvider from '@/recoil/RecoilRootProvider';
+import { AlertContextProvider } from '@/contexts/AlertContext';
 
 export const metadata: Metadata = {
   title: 'Market Bridge',
@@ -20,11 +21,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="flex flex-col w-full max-w-screen-2xl mx-auto h-full">
+        <div id="root-portal"></div>
         <RecoilRootProvider>
-          <Providers>
-            <Header />
-            {children}
-          </Providers>
+          <AlertContextProvider>
+            <Providers>
+              <Header />
+              {children}
+            </Providers>
+          </AlertContextProvider>
         </RecoilRootProvider>
       </body>
     </html>

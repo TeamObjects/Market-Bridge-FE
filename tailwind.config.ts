@@ -16,6 +16,11 @@ const config: Config = {
       screens: {
         xs: { max: '450px' },
       },
+      zIndex: {
+        backdrop: '10',
+        alert: '11',
+        modal: '12',
+      },
     },
   },
   plugins: [],

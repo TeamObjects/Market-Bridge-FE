@@ -12,6 +12,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import { ReactNode } from 'react';
+import useAlertContext from '@/hooks/useAlertContext';
 
 export type LoginUserInfo = {
   email: UserInfo['email'];
@@ -19,6 +20,7 @@ export type LoginUserInfo = {
 };
 
 const LogInForm = ({ children }: { children: ReactNode }) => {
+  const { open } = useAlertContext();
   const {
     mutate: login,
     isError,
@@ -31,7 +33,15 @@ const LogInForm = ({ children }: { children: ReactNode }) => {
         router.push('/');
       }
     },
-    onError: (error) => console.error('로그인 실패', error),
+    onError: (error) => {
+      open({
+        title: '아이디나 비밀번호가 잘못 입력되었습니다.',
+        buttonLabel: '확인',
+        onButtonClick: () => {
+          console.error(error);
+        },
+      });
+    },
   });
   const router = useRouter();
 
@@ -39,8 +49,6 @@ const LogInForm = ({ children }: { children: ReactNode }) => {
     const { email, password } = values;
     login({ email, password });
   };
-
-  if (isError) return <div>error: {error.message}</div>;
 
   return (
     <FormContext

@@ -9,7 +9,7 @@ import {
   Category,
   Mypage,
   ShoppingBasket,
-} from '../../public/svgs';
+} from '../../../public/svgs';
 
 const EXCLUSION_PATHS = [
   '/login',
