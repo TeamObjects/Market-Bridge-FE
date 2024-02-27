@@ -1,5 +1,7 @@
 'use client';
 import Depth2 from '@/components/(header)/Depth2';
+import { Category } from '@/interfaces/product';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const depth1List = [
@@ -21,11 +23,15 @@ const depth1List = [
 ];
 
 export default function Depth1() {
+  const queryClient = useQueryClient();
+  const depth1 = queryClient.getQueryData<Category>(['category']);
+
   const [hoverNum, setHoverNum] = useState(0);
 
   const isHover = !!hoverNum;
-
-  console.log(hoverNum);
+  const depth2List = depth1?.data
+    ? depth1?.data[hoverNum - 1]?.childCategories
+    : [];
 
   return (
     <div
@@ -34,19 +40,19 @@ export default function Depth1() {
     >
       <div className="w-48 p-4">
         <ul className={`flex flex-col gap-y-2`}>
-          {depth1List.map((menu, idx) => (
+          {depth1?.data.map((menu, idx) => (
             <li
-              key={menu}
+              key={menu.categoryId}
               onMouseEnter={() => setHoverNum(idx + 1)}
               className={`${hoverNum === idx + 1 ? 'text-sky-500 flex justify-between font-bold' : ''} transition-all duration-150 cursor-pointer `}
             >
-              <span>{menu}</span>
+              <span>{menu.name}</span>
               <span>{hoverNum === idx + 1 ? '▶' : ''}</span>
             </li>
           ))}
         </ul>
       </div>
-      {isHover && <Depth2 number={hoverNum} />}
+      {isHover && <Depth2 depth2List={depth2List} />}
       {/* <Depth2 number={hoverNum} /> */}
     </div>
   );
