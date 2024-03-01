@@ -24,11 +24,7 @@ const RegisterForm = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
   const { open } = useAlertContext();
 
-  const {
-    mutate: register,
-    isError,
-    error,
-  } = useMutation({
+  const { mutate: register } = useMutation({
     mutationFn: registerUser,
     onSuccess: ({ code, message }) => {
       if (code === 201) router.push('/login');
@@ -48,8 +44,6 @@ const RegisterForm = ({ children }: { children: ReactNode }) => {
       register(values);
     }
   };
-
-  if (isError) return <div>error: {error.message}</div>;
 
   return (
     <FormContext

@@ -11,8 +11,6 @@ const FindAuthButton = () => {
 
   const { isResetPasswordCheck } = useContext(formContext) as FormValue;
 
-  console.log(isResetPasswordCheck);
-
   return (
     <>
       {path === '/login/findPassword' && (

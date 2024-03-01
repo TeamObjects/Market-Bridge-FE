@@ -8,24 +8,32 @@ import { checkDuplicateEmail } from '@/api/authApi';
 import { FormValue, formContext } from '@/contexts/FormContext';
 import useDebounce from '@/hooks/useDebounce';
 
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import authState from '@/recoil/authAtom';
 
 const RegisterFormMain = () => {
   const [isDuplicateCheck, setIsDuplicateCheck] = useState(false);
   const { isEnterUserInfo, values } = useContext(formContext) as FormValue;
+  const [_, setIsDuplicateEmail] = useRecoilState(authState);
 
   const debouncedEmail = useDebounce(values?.email, 300);
 
-  const duplicateEmailCheck = async (email: string | undefined) => {
-    if (email) {
-      const response = await checkDuplicateEmail(email);
-      setIsDuplicateCheck(response.data.checked);
-    }
-  };
+  const duplicateEmailCheck = useCallback(
+    async (email: string | undefined) => {
+      if (email) {
+        const response = await checkDuplicateEmail(email);
+        const checked = response.data.checked;
+        setIsDuplicateCheck(checked);
+        setIsDuplicateEmail(checked);
+      }
+    },
+    [setIsDuplicateCheck, setIsDuplicateEmail],
+  );
 
   useEffect(() => {
     duplicateEmailCheck(debouncedEmail);
-  }, [debouncedEmail]);
+  }, [debouncedEmail, duplicateEmailCheck]);
 
   if (isEnterUserInfo) return null;
 
