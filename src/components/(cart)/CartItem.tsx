@@ -1,5 +1,3 @@
-'use client';
-import { useState } from 'react';
 import Image from 'next/image';
 import { ShoppingCart, Close } from '../../../public/svgs';
 import { Content } from '@/interfaces/cart';
@@ -54,7 +52,7 @@ const CartItem: React.FC<CartItemProps> = ({
               {item?.quantity}
             </p>
             <p className="flex w-[15%] justify-center text-[14px]">
-              {item?.productPrice}
+              {item?.productPrice.toLocaleString()}원
             </p>
             <Image
               src={Close}
