@@ -6,19 +6,18 @@ import { Content } from '@/interfaces/cart';
 
 interface CartItemProps {
   items: Content[];
+  checkedItems: { [key: number]: boolean };
+  handleCheckboxChange: (cardId: number) => void;
 }
 
-const CartItem: React.FC<CartItemProps> = ({ items }) => {
-  console.log(items);
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
+const CartItem: React.FC<CartItemProps> = ({
+  items,
+  checkedItems,
+  handleCheckboxChange,
+}) => {
   return (
     <div className="flex flex-col w-[100%] h-[94%] border-y-2">
-      <div className="flex w-[100%] h-[10%] items-center text-[20px]">
+      <div className="flex w-[15%] h-[10%] items-center justify-around text-[20px]">
         <Image src={ShoppingCart} alt="쇼핑카트" width={30} height={30} />
         <p>상품</p>
       </div>
@@ -31,9 +30,9 @@ const CartItem: React.FC<CartItemProps> = ({ items }) => {
             <input
               type="checkbox"
               id="checkbox"
-              className={`w-[5%] h-6 rounded-full bg-white transition duration-300 cursor-pointer focus:ring-2 focus:ring-blue-500 `}
-              checked={isChecked}
-              onChange={handleCheckboxChange}
+              className={`w-[5%] h-6 rounded-full bg-white transition duration-300 cursor-pointer `}
+              onChange={() => handleCheckboxChange(item.cartId)}
+              checked={checkedItems[item.cartId] || false}
             />
             <div className="w-[8%] h-[80%] relative">
               <Image
@@ -43,17 +42,27 @@ const CartItem: React.FC<CartItemProps> = ({ items }) => {
                 className="rounded-xl"
               />
             </div>
-            <div className="flex flex-col w-[52%] h-[100%] m-auto">
-              <p className="flex w-[100%] h-[60%] text-[16px] items-center font-normal">
+            <div className="flex flex-col w-[52%] h-[100%] m-auto cursor-pointer">
+              <p className="flex w-[100%] h-[60%] text-[16px] items-center font-normal ">
                 {item?.productName}
               </p>
               <p className="flex w-[100%] h-[40%] text-[14px] text-slate-500">
                 {item?.optionNames}
               </p>
             </div>
-            <p className="w-[15%] text-[14px]">{item?.quantity}</p>
-            <p className="w-[15%] text-[14px]">{item?.productPrice}</p>
-            <Image src={Close} alt="닫기 버튼" width={25} height={25} />
+            <p className="flex w-[15%] justify-center text-[14px]">
+              {item?.quantity}
+            </p>
+            <p className="flex w-[15%] justify-center text-[14px]">
+              {item?.productPrice}
+            </p>
+            <Image
+              src={Close}
+              alt="닫기 버튼"
+              width={25}
+              height={25}
+              className="cursor-pointer"
+            />
           </div>
         );
       })}
