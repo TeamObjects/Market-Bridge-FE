@@ -1,5 +1,5 @@
 import AuthInput from '@/components/(auth)/AuthInput';
-import LoginFormButtons from '@/components/(auth)/LoginFormFindButtons';
+import LoginFormFindButtons from '@/components/(auth)/LoginFormFindButtons';
 import ValidationMessage from '@/components/(auth)/ValidationMessage';
 import ValidationMessages from '@/components/(auth)/ValidationMessages';
 
@@ -23,7 +23,7 @@ const LoginFormMain = () => {
             자동 로그인
           </label>
         </div>
-        <LoginFormButtons />
+        <LoginFormFindButtons />
       </div>
     </>
   );

@@ -18,10 +18,9 @@ interface FindAuthFormProps {
 const FindAuthForm = ({ children }: FindAuthFormProps) => {
   const [state, setState] = useRecoilState(authState);
 
-  const { open } = useAlertContext();
-
   const router = useRouter();
   const path = usePathname();
+  const { open } = useAlertContext();
 
   const openAlert = (
     code: number,

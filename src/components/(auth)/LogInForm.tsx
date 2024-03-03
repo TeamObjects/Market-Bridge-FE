@@ -20,7 +20,9 @@ export type LoginUserInfo = {
 };
 
 const LogInForm = ({ children }: { children: ReactNode }) => {
+  const router = useRouter();
   const { open } = useAlertContext();
+
   const { mutate: login } = useMutation({
     mutationFn: loginUser,
     onSuccess: ({ code, data: { accessToken } }) => {
@@ -38,7 +40,6 @@ const LogInForm = ({ children }: { children: ReactNode }) => {
       });
     },
   });
-  const router = useRouter();
 
   const handleLoginSubmit = (values: LoginUserInfo) => {
     const { email, password } = values;

@@ -38,11 +38,6 @@ export const AlertContextProvider = ({
   const [alertState, setAlertState] = useState(defaultValues);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
 
-  useEffect(() => {
-    const $portal_root = document.getElementById('root-portal');
-    setPortalRoot($portal_root);
-  }, []);
-
   const close = useCallback(() => {
     setAlertState(defaultValues);
   }, []);
@@ -60,6 +55,11 @@ export const AlertContextProvider = ({
     },
     [close],
   );
+
+  useEffect(() => {
+    const $portal_root = document.getElementById('root-portal');
+    setPortalRoot($portal_root);
+  }, []);
 
   const values = useMemo(() => ({ open }), [open]);
 

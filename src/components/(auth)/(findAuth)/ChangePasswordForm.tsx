@@ -2,9 +2,11 @@
 
 import FindAuthButton from '@/components/(auth)/(findAuth)/FindAuthButton';
 import FindAuthInput from '@/components/(auth)/(findAuth)/FindAuthInput';
+import ValidationMessage from '@/components/(auth)/ValidationMessage';
+
 import { FormValue, formContext } from '@/contexts/FormContext';
+
 import { useCallback, useContext, useEffect, useState } from 'react';
-import ValidationMessage from '../ValidationMessage';
 
 const ChangePasswordForm = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(false);
