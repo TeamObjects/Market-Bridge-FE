@@ -57,7 +57,9 @@ const CartList = () => {
         <label htmlFor="selectAllCheckbox">
           전체선택 ({checkedItemCount}/{data?.data.content.length || 0})
         </label>
-        <p>선택삭제</p>
+        <p className="cursor-pointer" onClick={() => alert('준비중입니다')}>
+          선택삭제
+        </p>
       </div>
       <CartItem
         items={data?.data.content}

@@ -48,9 +48,21 @@ const CartItem: React.FC<CartItemProps> = ({
                 {item?.optionNames}
               </p>
             </div>
-            <p className="flex w-[15%] justify-center text-[14px]">
-              {item?.quantity}
-            </p>
+            <div className="flex w-[15%] justify-around text-[14px] border">
+              <div
+                className="flex w-[30%] justify-center border-r cursor-pointer"
+                onClick={() => alert('준비중입니다')}
+              >
+                -
+              </div>
+              <p className="flex w-[40%] justify-center">{item?.quantity}</p>
+              <div
+                className="flex w-[30%] justify-center border-l cursor-pointer"
+                onClick={() => alert('준비중입니다')}
+              >
+                +
+              </div>
+            </div>
             <p className="flex w-[15%] justify-center text-[14px]">
               {item?.productPrice.toLocaleString()}원
             </p>
@@ -60,6 +72,7 @@ const CartItem: React.FC<CartItemProps> = ({
               width={25}
               height={25}
               className="cursor-pointer"
+              onClick={() => alert('준비중입니다')}
             />
           </div>
         );
