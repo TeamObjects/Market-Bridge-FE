@@ -1,7 +1,14 @@
 import { UserInfo } from '@/components/(auth)/RegisterForm';
+
 import { ValidationFunctions } from '@/utils/isValidationCheck';
 
-import { ChangeEvent, FormEvent, MouseEventHandler, useState } from 'react';
+import {
+  ChangeEvent,
+  FormEvent,
+  MouseEventHandler,
+  useRef,
+  useState,
+} from 'react';
 
 export interface useFormProps {
   formType: string;
@@ -26,6 +33,10 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const [isValid, setIsValid] = useState(initialValidValue);
   const [isEmpty, setIsEmpty] = useState(initialEmptyValue);
   const [isEnterUserInfo, setIsEnterUserInfo] = useState(false);
+  const [isAllChecked, setIsAllChecked] = useState(false);
+  const [isResetPasswordCheck, setIsResetPasswordCheck] = useState(false);
+
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
@@ -50,7 +61,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
       const isEmailAndPasswordEntered =
         values.email !== '' && values.password !== '';
       setIsEnterUserInfo(isEmailAndPasswordEntered);
-    } else {
+    } else if (formType === 'register') {
       const isEnteredAllUserInfo = Object.values(values).every(
         (value) => value !== '',
       );
@@ -65,7 +76,7 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    onSubmit && onSubmit(values);
+    onSubmit && onSubmit({ ...values, isAgree: isAllChecked });
   };
 
   const getFieldProps = (name: string) => {
@@ -84,11 +95,16 @@ const useForm = ({ formType, onSubmit, validate }: useFormProps) => {
     isValid,
     isEmpty,
     isEnterUserInfo,
+    formRef,
     handleAllUserInfoCheck,
     handleClickContinue,
     handleChange,
     handleSubmit,
     getFieldProps,
+    isAllChecked,
+    setIsAllChecked,
+    isResetPasswordCheck,
+    setIsResetPasswordCheck,
   };
 };
 

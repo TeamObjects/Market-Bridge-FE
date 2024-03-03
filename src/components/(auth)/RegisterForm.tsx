@@ -1,9 +1,14 @@
 'use client';
 
-import registerUser from '@/api/authApi';
+import { registerUser } from '@/api/authApi';
 import FormContext from '@/contexts/FormContext';
+import useAlertContext from '@/hooks/useAlertContext';
 import { validationFunctions } from '@/utils/isValidationCheck';
+
 import { useMutation } from '@tanstack/react-query';
+
+import { useRouter } from 'next/navigation';
+
 import { ReactNode } from 'react';
 
 export interface UserInfo {
@@ -16,21 +21,29 @@ export interface UserInfo {
 }
 
 const RegisterForm = ({ children }: { children: ReactNode }) => {
-  const {
-    mutate: register,
-    isError,
-    error,
-  } = useMutation({
+  const router = useRouter();
+  const { open } = useAlertContext();
+
+  const { mutate: register } = useMutation({
     mutationFn: registerUser,
-    onSuccess: (data) => console.log('회원가입 성공', data),
+    onSuccess: ({ code, message }) => {
+      if (code === 201) router.push('/login');
+      console.log('회원가입 성공', message);
+    },
     onError: (error) => console.error('회원가입 실패', error),
   });
 
   const handleRegisterSubmit = (values: UserInfo) => {
-    register({ ...values, isAgree: true });
-  };
+    const { isAgree } = values;
 
-  if (isError) return <div>error: {error.message}</div>;
+    if (!isAgree) {
+      open({
+        title: '필수 동의사항에 체크해주세요.',
+      });
+    } else {
+      register(values);
+    }
+  };
 
   return (
     <FormContext

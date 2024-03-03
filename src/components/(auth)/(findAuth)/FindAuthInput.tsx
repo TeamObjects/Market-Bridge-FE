@@ -1,4 +1,5 @@
-import AuthInput from '../AuthInput';
+import AuthInput from '@/components/(auth)/AuthInput';
+import { ChangeEvent } from 'react';
 
 interface FindAuthInputProps {
   label: string;

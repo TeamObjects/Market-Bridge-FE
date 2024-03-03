@@ -1,10 +1,11 @@
+import OAuthButton from '@/components/(auth)/OAuthButton';
+
 import {
   AppleLogo,
   GoogleLogo,
   KakaoLogo,
   NaverLogo,
 } from '../../../public/svgs';
-import OAuthButton from './OAuthButton';
 
 const OAuthFooter = () => {
   return (

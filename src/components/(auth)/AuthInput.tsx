@@ -1,6 +1,7 @@
 'use client';
 
 import { FormValue, formContext } from '@/contexts/FormContext';
+
 import { useContext } from 'react';
 
 interface AuthInputProps {
@@ -31,6 +32,7 @@ const AuthInput = ({
       placeholder={placeholder}
       className={style}
       onChange={handleChange}
+      required
     />
   );
 };

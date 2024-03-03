@@ -1,11 +1,13 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { ReactNode } from 'react';
-import AuthPage from '../AuthPage';
-import FoundIdMain from './FoundIdMain';
+import FoundIdMain from '@/components/(auth)/(findAuth)/FoundIdMain';
+import AuthPage from '@/components/(auth)/AuthPage';
+import Button from '@/components/shared/Button';
+
 import Link from 'next/link';
-import Button from '@/components/Button';
+import { useSearchParams } from 'next/navigation';
+
+import { ReactNode } from 'react';
 
 const STYLE_WHITE_BUTTON =
   'w-[100%] h-[44px] p-6 mb-4 text-[13px] text-[#011B5B] border-[1px] border-solid border-[#011B5B] rounded-full bg-white';

@@ -1,12 +1,15 @@
 'use client';
 
 import { UserInfo } from '@/components/(auth)/RegisterForm';
+
 import useForm, { useFormProps } from '@/hooks/useForm';
+
 import {
   ChangeEvent,
   FormEvent,
   MouseEventHandler,
   ReactNode,
+  RefObject,
   createContext,
 } from 'react';
 
@@ -21,10 +24,14 @@ export interface FormValue {
   isValid?: Record<string, boolean>;
   isEmpty?: Record<string, boolean>;
   isEnterUserInfo?: boolean;
+  isResetPasswordCheck?: boolean;
+  setIsResetPasswordCheck?: (isResetPasswordCheck: boolean) => void;
+  formRef?: RefObject<HTMLFormElement>;
   handleAllUserInfoCheck?: () => void;
   handleClickContinue?: MouseEventHandler<HTMLButtonElement>;
   handleChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit?: (e: FormEvent<HTMLFormElement>) => void;
+  setIsAllChecked?: (isAllChecked: boolean) => void;
   getFieldProps?: (name: string) => {
     name: string;
     value: string | boolean | undefined;
@@ -44,7 +51,12 @@ const FormContext = ({
 
   return (
     <formContext.Provider value={formValue}>
-      <form id={id} className={className} onSubmit={formValue.handleSubmit}>
+      <form
+        id={id}
+        ref={formValue.formRef}
+        className={className}
+        onSubmit={formValue.handleSubmit}
+      >
         {children}
       </form>
     </formContext.Provider>

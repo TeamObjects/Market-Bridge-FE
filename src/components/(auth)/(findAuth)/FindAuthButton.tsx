@@ -1,29 +1,43 @@
 'use client';
 
-import Button, { STYLE_BUTTON_DEFAULT } from '@/components/Button';
+import Button, { STYLE_BUTTON_DEFAULT } from '@/components/shared/Button';
+import { FormValue, formContext } from '@/contexts/FormContext';
+
 import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
-import React from 'react';
+import { useContext } from 'react';
 
 const FindAuthButton = () => {
-  const router = useRouter();
   const path = usePathname();
-  const pathCheck = path === '/login/findPassword';
 
-  const handleButtonClick = () => {
-    router.push(
-      pathCheck
-        ? '/login/findPassword?complete=password'
-        : '/login/findId?complete=id',
-    );
-  };
+  const { isResetPasswordCheck } = useContext(formContext) as FormValue;
 
   return (
-    <Button
-      text="인증번호 받기"
-      style={`${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
-      onClick={handleButtonClick}
-    />
+    <>
+      {path === '/login/findPassword' && (
+        <Button
+          type="submit"
+          text="비밀번호 재설정하기"
+          style={`${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
+        />
+      )}
+      {path === '/login/findId' && (
+        <Button
+          type="submit"
+          text="아이디 찾기"
+          style={`${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
+        />
+      )}
+      {path === '/login/findPassword/changePassword' && (
+        <Button
+          type="submit"
+          text="확인"
+          style={`${
+            isResetPasswordCheck ? 'opacity-50 cursor-not-allowed' : ''
+          } ${STYLE_BUTTON_DEFAULT} mt-4 mb-20`}
+          disabled={isResetPasswordCheck}
+        />
+      )}
+    </>
   );
 };
 

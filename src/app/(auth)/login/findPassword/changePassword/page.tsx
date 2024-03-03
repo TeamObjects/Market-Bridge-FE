@@ -1,10 +1,9 @@
-import ChangePasswordCompleteModal from '@/components/(auth)/(findAuth)/ChangePasswordCompleteModal';
+import ChangePasswordForm from '@/components/(auth)/(findAuth)/ChangePasswordForm';
 import FindAuthForm from '@/components/(auth)/(findAuth)/FindAuthForm';
-import FindAuthFormMain from '@/components/(auth)/(findAuth)/FindAuthFormMain';
 import FindAuthPage from '@/components/(auth)/(findAuth)/FindAuthPage';
 import AuthHeader from '@/components/(auth)/AuthHeader';
 
-const FindPassword = () => {
+const ChangePassword = () => {
   return (
     <>
       <FindAuthPage
@@ -16,12 +15,11 @@ const FindPassword = () => {
         }
       >
         <FindAuthForm>
-          <FindAuthFormMain />
+          <ChangePasswordForm />
         </FindAuthForm>
       </FindAuthPage>
-      <ChangePasswordCompleteModal />
     </>
   );
 };
 
-export default FindPassword;
+export default ChangePassword;

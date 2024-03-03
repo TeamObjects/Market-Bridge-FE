@@ -9,13 +9,14 @@ import {
   Category,
   Mypage,
   ShoppingBasket,
-} from '../../public/svgs';
+} from '../../../public/svgs';
 
 const EXCLUSION_PATHS = [
   '/login',
   '/register',
   '/login/findId',
   '/login/findPassword',
+  '/login/findPassword/changePassword',
 ];
 
 const Header: React.FC = () => {
