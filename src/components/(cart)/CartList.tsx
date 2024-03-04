@@ -63,7 +63,7 @@ const CartList = () => {
   useEffect(() => {
     if (data) {
       const initialCheckedItems: { [key: number]: boolean } = {};
-      data.data.content.forEach((item: Content) => {
+      data.data?.content.forEach((item: Content) => {
         initialCheckedItems[item.cartId] = true;
       });
       setCheckedItems(initialCheckedItems);
@@ -81,14 +81,14 @@ const CartList = () => {
           onChange={handleAllCheckboxChange}
         />
         <label htmlFor="selectAllCheckbox">
-          전체선택 ({checkedItemCount}/{data?.data.content.length || 0})
+          전체선택 ({checkedItemCount}/{data?.data?.content.length || 0})
         </label>
         <p className="cursor-pointer" onClick={() => alert('준비중입니다')}>
           선택삭제
         </p>
       </div>
       <CartItem
-        items={data?.data.content}
+        items={data?.data?.content}
         checkedItems={checkedItems}
         handleCheckboxChange={handleCheckboxChange}
         handleQuantityChange={handleQuantityChange}
