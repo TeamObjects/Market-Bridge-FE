@@ -5,8 +5,8 @@ import { Content } from '@/interfaces/cart';
 interface CartItemProps {
   items: Content[];
   checkedItems: { [key: number]: boolean };
-  handleCheckboxChange: (cardId: number) => void;
-  handleQuantityChange: (itemId: number, newQuantity: number) => void;
+  handleCheckboxChange: (cartId: number) => void;
+  handleQuantityChange: (cartId: number, newQuantity: number) => void;
   handleDeleteItem: (cartId: number) => void;
 }
 
