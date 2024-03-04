@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import CartItem from './CartItem';
-import { changeQuantity, deleteItem, fetchCart } from '@/api/cartApi';
+import { changeQuantity, deleteCart, fetchCart } from '@/api/cartApi';
 import { Content } from '@/interfaces/cart';
 
 const CartList = () => {
@@ -14,15 +14,15 @@ const CartList = () => {
   const itemQuantityMutation = useMutation<
     void,
     Error,
-    { itemId: number; newQuantity: number }
+    { cartId: number; newQuantity: number }
   >({
-    mutationFn: ({ itemId, newQuantity }) =>
-      changeQuantity(itemId, newQuantity),
+    mutationFn: ({ cartId, newQuantity }) =>
+      changeQuantity(cartId, newQuantity),
     onSuccess: () => refetch(),
   });
 
-  const deleteItemMutation = useMutation({
-    mutationFn: (itemId: number) => deleteItem(itemId),
+  const deleteCartMutation = useMutation({
+    mutationFn: (cartId: number) => deleteCart(cartId),
     onSuccess: () => refetch(),
   });
 
@@ -49,12 +49,15 @@ const CartList = () => {
     }));
   };
 
-  const handleQuantityChange = (itemId: number, newQuantity: number) => {
-    itemQuantityMutation.mutate({ itemId, newQuantity });
+  const handleQuantityChange = (cartId: number, newQuantity: number) => {
+    if (newQuantity <= 0) {
+      handleDeleteItem(cartId);
+    }
+    itemQuantityMutation.mutate({ cartId, newQuantity });
   };
 
   const handleDeleteItem = (cartId: number) => {
-    deleteItemMutation.mutate(cartId);
+    deleteCartMutation.mutate(cartId);
   };
 
   useEffect(() => {

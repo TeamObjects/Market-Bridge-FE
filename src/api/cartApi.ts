@@ -30,3 +30,14 @@ export const changeQuantity = async (itemId: number, newQuantity: number) => {
     body: JSON.stringify({ quantity: newQuantity }),
   });
 };
+
+export const deleteCart = async (cartId: number) => {
+  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/carts`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `bearer ${ACCESS_TOKEN}`,
+    },
+    body: JSON.stringify({ selectedCartIds: [cartId] }),
+  });
+};
