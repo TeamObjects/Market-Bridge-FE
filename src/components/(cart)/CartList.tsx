@@ -1,19 +1,35 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import CartItem from './CartItem';
-import { fetchCart } from '@/api/cartApi';
+import { changeQuantity, deleteItem, fetchCart } from '@/api/cartApi';
 import { Content } from '@/interfaces/cart';
 
 const CartList = () => {
-  const { data } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ['getCartList'],
     queryFn: () => fetchCart(),
+  });
+
+  const itemQuantityMutation = useMutation<
+    void,
+    Error,
+    { itemId: number; newQuantity: number }
+  >({
+    mutationFn: ({ itemId, newQuantity }) =>
+      changeQuantity(itemId, newQuantity),
+    onSuccess: () => refetch(),
+  });
+
+  const deleteItemMutation = useMutation({
+    mutationFn: (itemId: number) => deleteItem(itemId),
+    onSuccess: () => refetch(),
   });
 
   const [checkedItems, setCheckedItems] = useState<{ [key: number]: boolean }>(
     {},
   );
+  const checkedItemCount = Object.values(checkedItems).filter(Boolean).length;
 
   const handleAllCheckboxChange = () => {
     if (data) {
@@ -32,7 +48,14 @@ const CartList = () => {
       [itemId]: !prev[itemId],
     }));
   };
-  const checkedItemCount = Object.values(checkedItems).filter(Boolean).length;
+
+  const handleQuantityChange = (itemId: number, newQuantity: number) => {
+    itemQuantityMutation.mutate({ itemId, newQuantity });
+  };
+
+  const handleDeleteItem = (cartId: number) => {
+    deleteItemMutation.mutate(cartId);
+  };
 
   useEffect(() => {
     if (data) {
@@ -65,6 +88,8 @@ const CartList = () => {
         items={data?.data.content}
         checkedItems={checkedItems}
         handleCheckboxChange={handleCheckboxChange}
+        handleQuantityChange={handleQuantityChange}
+        handleDeleteItem={handleDeleteItem}
       />
     </div>
   );

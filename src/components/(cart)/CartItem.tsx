@@ -6,12 +6,16 @@ interface CartItemProps {
   items: Content[];
   checkedItems: { [key: number]: boolean };
   handleCheckboxChange: (cardId: number) => void;
+  handleQuantityChange: (itemId: number, newQuantity: number) => void;
+  handleDeleteItem: (cartId: number) => void;
 }
 
 const CartItem: React.FC<CartItemProps> = ({
   items,
   checkedItems,
   handleCheckboxChange,
+  handleQuantityChange,
+  handleDeleteItem,
 }) => {
   return (
     <div className="flex flex-col w-[100%] h-[94%] border-y-2">
@@ -51,20 +55,24 @@ const CartItem: React.FC<CartItemProps> = ({
             <div className="flex w-[15%] justify-around text-[14px] border">
               <div
                 className="flex w-[30%] justify-center border-r cursor-pointer"
-                onClick={() => alert('준비중입니다')}
+                onClick={() => {
+                  handleQuantityChange(item.cartId, item?.quantity - 1);
+                }}
               >
                 -
               </div>
               <p className="flex w-[40%] justify-center">{item?.quantity}</p>
               <div
                 className="flex w-[30%] justify-center border-l cursor-pointer"
-                onClick={() => alert('준비중입니다')}
+                onClick={() => {
+                  handleQuantityChange(item?.cartId, item?.quantity + 1);
+                }}
               >
                 +
               </div>
             </div>
             <p className="flex w-[15%] justify-center text-[14px]">
-              {item?.productPrice.toLocaleString()}원
+              {(item?.productPrice * item?.quantity).toLocaleString()}원
             </p>
             <Image
               src={Close}
@@ -72,7 +80,7 @@ const CartItem: React.FC<CartItemProps> = ({
               width={25}
               height={25}
               className="cursor-pointer"
-              onClick={() => alert('준비중입니다')}
+              onClick={() => handleDeleteItem(item?.cartId)}
             />
           </div>
         );
