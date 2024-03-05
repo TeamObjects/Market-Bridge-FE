@@ -26,14 +26,14 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex flex-row w-[100%] h-[10rem] text-[1.6rem]">
-      <div className="flex w-[25%] justify-center items-center">
+      <div className="flex justify-center items-center ml-6">
         <Image
           src={BridgeLogo}
           alt="브릿지로고"
           className="w-[10rem] h-[7rem]"
         />
       </div>
-      <div className="flex w-[30%]">
+      <div className="flex w-[40%]">
         <div className="flex justify-center items-center cursor-pointer flex-grow">
           <Image src={Category} alt="카테고리" />
           <p>카테코리</p>
@@ -54,14 +54,14 @@ const Header: React.FC = () => {
           특가/혜택
         </Link>
       </div>
-      <div className="flex w-[20%] justify-center items-center">
+      <div className="flex w-[25%] justify-center items-center">
         <input
           type="text"
           placeholder="검색어를 입력하세요."
           className="flex w-[90%] h-[40%] border border-[#03BAF2] rounded-full"
         />
       </div>
-      <div className="flex w-[20%] justify-around items-center">
+      <div className="flex w-[25%] justify-around items-center">
         <Link href="/register">회원가입</Link>
         <Link href="/login">로그인</Link>
         <Link href="/">고객센터</Link>

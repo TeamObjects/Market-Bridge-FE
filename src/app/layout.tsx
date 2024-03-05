@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className="flex flex-col w-full max-w-screen-2xl mx-auto h-full">
+      <body className="flex flex-col w-full max-w-[1280px] mx-auto h-full">
         <RootPortal />
         <RecoilRootProvider>
           <AlertContextProvider>
