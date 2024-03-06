@@ -1,6 +1,8 @@
 import GenericListItem from '@/components/(auth)/(mypage)/GenericListItem';
 import Button from '@/components/shared/Button';
 import OrderListItemInfo from './OrderListItemInfo';
+import { FaChevronRight } from 'react-icons/fa';
+import Link from 'next/link';
 
 interface OrderListItem {
   orderId: number;
@@ -54,6 +56,23 @@ const STYLE_BUTTON =
 const OrderListItem = ({ item = ORDER_EXAMPLE }: OrderListItemProps) => {
   return (
     <li className="list-none p-[20px]">
+      <div className="flex justify-between mb-4">
+        <div className="text-[17px] font-semibold">
+          <span className="mr-2">{item?.createdAt.substring(0, 10)}</span>
+          <span>{`(${item?.createdAt.substring(
+            11,
+            13,
+          )}시 ${item?.createdAt.substring(14, 16)}분)`}</span>
+        </div>
+        <Link
+          href={`/mypage/order/${item.orderNo}`}
+          className="flex items-center text-[14px] text-gray-600"
+        >
+          <span className="mr-1">주문내역 상세보기</span>
+          <FaChevronRight />
+        </Link>
+      </div>
+      <div className="w-full h-[1px] mb-10 bg-gray-300" />
       <GenericListItem
         thumbnail={ORDER_EXAMPLE.orderDetailInfos[0].productThumbImageUrl}
         buttons={<Button text="1:1 문의" style={STYLE_BUTTON} />}
