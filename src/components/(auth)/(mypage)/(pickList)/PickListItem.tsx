@@ -4,9 +4,7 @@ import PickListItemInfo from '@/components/(auth)/(mypage)/(pickList)/PickListIt
 import { PickListItemProps } from '@/components/(auth)/(mypage)/(pickList)/PickListItems';
 import GenericListItem from '@/components/(auth)/(mypage)/GenericListItem';
 import Button from '@/components/shared/Button';
-
-const STYLE_BUTTON_DELETE =
-  'w-[120px] h-[42px] my-2 py-2 text-[15px] rounded-[3px] border-[1px] border-gray-300 hover:text-white hover:bg-gray-300';
+import PickListDeleteButton from './PickListDeleteButton';
 
 const STYLE_BUTTON_CART =
   'w-[120px] h-[42px] my-2 py-2 text-[15px] rounded-[3px] border-[1px] border-[#011B5B] hover:text-white hover:bg-[#011B5B]';
@@ -18,7 +16,7 @@ const PickListItem = ({ item }: PickListItemProps) => {
         thumbnail={item?.thumbImgUrl}
         buttons={
           <div className="flex flex-col justify-center items-center ">
-            <Button text="삭제" style={STYLE_BUTTON_DELETE} />
+            <PickListDeleteButton />
             <Button
               text={
                 <div className="flex justify-center items-center ">

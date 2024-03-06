@@ -29,7 +29,8 @@ const defaultValues: AlertProps = {
   open: false,
   title: null,
   description: null,
-  onButtonClick: () => {},
+  onLeftButtonClick: () => {},
+  onRightButtonClick: () => {},
 };
 
 export const AlertContextProvider = ({
@@ -43,12 +44,15 @@ export const AlertContextProvider = ({
   }, []);
 
   const open = useCallback(
-    ({ onButtonClick, ...options }: AlertOptions) => {
+    ({ onLeftButtonClick, onRightButtonClick, ...options }: AlertOptions) => {
       setAlertState({
         ...options,
-        onButtonClick: () => {
+        onLeftButtonClick: () => {
           close();
-          onButtonClick && onButtonClick();
+        },
+        onRightButtonClick: () => {
+          close();
+          onRightButtonClick && onRightButtonClick();
         },
         open: true,
       });

@@ -32,7 +32,7 @@ const FindAuthForm = ({ children }: FindAuthFormProps) => {
       open({
         title: message,
         description,
-        onButtonClick: () => {
+        onRightButtonClick: () => {
           console.error(errorCode);
         },
       });

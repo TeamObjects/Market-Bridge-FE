@@ -34,7 +34,7 @@ const LogInForm = ({ children }: { children: ReactNode }) => {
     onError: (error) => {
       open({
         title: '아이디나 비밀번호가 잘못 입력되었습니다.',
-        onButtonClick: () => {
+        onRightButtonClick: () => {
           console.error(error);
         },
       });
