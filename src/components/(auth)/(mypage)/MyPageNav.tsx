@@ -1,11 +1,6 @@
-import { FaChevronRight } from 'react-icons/fa';
-
-import Button from '@/components/shared/Button';
+import MyPageNavButton from '@/components/(auth)/(mypage)/MyPageNavButton';
 
 import Link from 'next/link';
-
-const STYLE_BUTTON_WHITE =
-  'flex items-center w-[80%] h-[19px] text-[16px] text-left hover:text-[#03BAF2]';
 
 const MY_PAGE_MENU = [
   { id: 1, title: '주문 내역', path: 'order' },
@@ -22,10 +17,7 @@ const MyPageNav = () => {
       <ul className="flex flex-col">
         {MY_PAGE_MENU.map((menu) => (
           <Link href={`/mypage/${menu.path}`} key={menu.id}>
-            <li className="flex justify-between items-center py-[15px] pl-[20px] pr-[13px] border-[1px] border-gray-100 cursor-pointer hover:bg-gray-50">
-              <Button text={menu.title} style={STYLE_BUTTON_WHITE} />
-              <FaChevronRight />
-            </li>
+            <MyPageNavButton menu={menu} />
           </Link>
         ))}
       </ul>
