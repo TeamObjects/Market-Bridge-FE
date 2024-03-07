@@ -61,8 +61,21 @@ export const AlertContextProvider = ({
   );
 
   useEffect(() => {
-    const $portal_root = document.getElementById('root-portal');
-    setPortalRoot($portal_root);
+    let el = document.getElementById('root-portal');
+
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'root-portal';
+      document.body.appendChild(el);
+    }
+
+    setPortalRoot(el);
+
+    return () => {
+      if (el && el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
+    };
   }, []);
 
   const values = useMemo(() => ({ open }), [open]);
