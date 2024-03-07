@@ -25,7 +25,7 @@ const ReviewList = () => {
         <Button
           text="작성 가능 후기"
           style={`${
-            tabIndex === '0' ? 'bg-white text-[#011B5B]' : 'bg-gray-100'
+            tabIndex !== '1' ? 'bg-white text-[#011B5B]' : 'bg-gray-100'
           } ${STYLE_BUTTON}`}
           onClick={() => handleClick('0')}
         />
