@@ -1,4 +1,4 @@
-import { ReviewListItemProps } from './ReviewListItems';
+import { ReviewListItemProps } from '@/components/(auth)/(mypage)/(review)/ReviewListItems';
 
 const ReviewListItemInfo = ({ item }: ReviewListItemProps) => {
   return (

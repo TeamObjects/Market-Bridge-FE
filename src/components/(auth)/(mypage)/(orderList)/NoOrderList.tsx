@@ -1,5 +1,6 @@
-import Button from '@/components/shared/Button';
 import { PiListMagnifyingGlass } from 'react-icons/pi';
+
+import Button from '@/components/shared/Button';
 
 export const STYLE_BUTTON =
   'w-[150px] h-[44px] p-6 mt-10 text-[14px] text-white rounded-[5px] bg-[#011B5B]';

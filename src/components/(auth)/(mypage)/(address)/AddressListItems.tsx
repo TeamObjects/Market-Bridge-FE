@@ -1,4 +1,4 @@
-import AddressListItem from './AddressListItem';
+import AddressListItem from '@/components/(auth)/(mypage)/(address)/AddressListItem';
 
 export interface AddressItem {
   addressId: number;

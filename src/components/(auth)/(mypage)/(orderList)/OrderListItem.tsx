@@ -1,7 +1,9 @@
+import { FaChevronRight } from 'react-icons/fa';
+
+import OrderListItemInfo from '@/components/(auth)/(mypage)/(orderList)/OrderListItemInfo';
 import GenericListItem from '@/components/(auth)/(mypage)/GenericListItem';
 import Button from '@/components/shared/Button';
-import OrderListItemInfo from './OrderListItemInfo';
-import { FaChevronRight } from 'react-icons/fa';
+
 import Link from 'next/link';
 
 interface OrderListItem {

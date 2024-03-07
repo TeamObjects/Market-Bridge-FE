@@ -1,10 +1,10 @@
 'use client';
 
 import ReviewListItems from '@/components/(auth)/(mypage)/(review)/ReviewListItems';
+import ReviewedListItems from '@/components/(auth)/(mypage)/(review)/ReviewedListItems';
 import Button from '@/components/shared/Button';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import ReviewedListItems from './ReviewedListItems';
 
 const STYLE_BUTTON =
   'w-[50%] h-[55px] text-[18px]  border-[1px] border-gray-200';
