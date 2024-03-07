@@ -1,7 +1,7 @@
 const MyBridgeDivider = () => {
   return (
     <>
-      <div className="w-full h-[2px] my-4 bg-black"></div>
+      <div className="w-full h-[2px] mt-4 bg-black"></div>
     </>
   );
 };
