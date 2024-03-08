@@ -21,7 +21,7 @@ const STYLE_BUTTON_WHITE =
 
 const MyPageNavButton = ({ menu }: MyPageNavButtonProps) => {
   const path = usePathname();
-  const isActive = path === `/mypage/${menu.path}`;
+  const isActive = path.includes(`/mypage/${menu.path}`);
 
   return (
     <li className="flex justify-between items-center py-[15px] pl-[20px] pr-[13px] border-[1px] border-gray-100 cursor-pointer hover:bg-gray-50">
@@ -29,7 +29,7 @@ const MyPageNavButton = ({ menu }: MyPageNavButtonProps) => {
         text={menu.title}
         style={`${STYLE_BUTTON_WHITE} ${isActive ? 'text-[#03BAF2]' : ''}`}
       />
-      <FaChevronRight />
+      <FaChevronRight className={`${isActive ? 'text-[#03BAF2]' : ''}`} />
     </li>
   );
 };
