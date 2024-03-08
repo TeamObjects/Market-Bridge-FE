@@ -7,7 +7,7 @@ const STYLE_BUTTON_MODIFY =
 
 const InfoModifyButtons = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center mt-[50px]">
       <Button text="탈퇴하기" style={STYLE_BUTTON_UNSUBSCRIBE} />
       <Button text="회원정보수정" style={STYLE_BUTTON_MODIFY} />
     </div>

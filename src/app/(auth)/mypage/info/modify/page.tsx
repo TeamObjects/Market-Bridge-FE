@@ -8,7 +8,7 @@ const InfoModify = () => {
   return (
     <MyBridgePage header={<InfoHeader />} divider={<MyBridgeDivider />}>
       <InfoModifyForm />
-      <div className="h-[1px] bg-gray-200" />
+      <div className="h-[1px] mt-10 bg-gray-200" />
       <InfoModifyButtons />
     </MyBridgePage>
   );

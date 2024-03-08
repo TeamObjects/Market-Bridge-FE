@@ -8,7 +8,7 @@ const InfoInput = ({ name, placeholder }: InfoInputProps) => {
     <input
       name={name}
       placeholder={placeholder}
-      className="w-[305px] h-[50px] pl-8 text-[16px] border-[1px] border-gray-300 outline-none"
+      className="w-[305px] h-[50px] pl-8 text-[16px] border-[1px] border-gray-300 outline-none rounded-[5px]"
     />
   );
 };
