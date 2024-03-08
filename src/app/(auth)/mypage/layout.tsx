@@ -16,9 +16,7 @@ const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <section className="flex pt-[50px]">
       <MyPageNav />
-      <article className="w-full pt-[5px] pl-[25px] bg-gray-50">
-        {children}
-      </article>
+      <article className="w-full pt-[5px] pl-[25px]">{children}</article>
     </section>
   );
 };
