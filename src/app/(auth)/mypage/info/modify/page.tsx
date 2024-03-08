@@ -1,17 +1,17 @@
-import InfoButton from '@/components/(auth)/(mypage)/(info)/InfoButton';
-import InfoForm from '@/components/(auth)/(mypage)/(info)/InfoForm';
 import InfoHeader from '@/components/(auth)/(mypage)/(info)/InfoHeader';
+import InfoModifyButtons from '@/components/(auth)/(mypage)/(info)/InfoModifyButtons';
+import InfoModifyForm from '@/components/(auth)/(mypage)/(info)/InfoModifyForm';
 import MyBridgeDivider from '@/components/(auth)/(mypage)/MyBridgeDivider';
 import MyBridgePage from '@/components/(auth)/(mypage)/MyBridgePage';
 
-const MyInfo = () => {
+const InfoModify = () => {
   return (
     <MyBridgePage header={<InfoHeader />} divider={<MyBridgeDivider />}>
-      <InfoForm />
-      <div className="h-[1px] mt-6 bg-gray-300" />
-      <InfoButton />
+      <InfoModifyForm />
+      <div className="h-[1px] bg-gray-200" />
+      <InfoModifyButtons />
     </MyBridgePage>
   );
 };
 
-export default MyInfo;
+export default InfoModify;
