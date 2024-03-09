@@ -70,11 +70,13 @@ const Header: React.FC = () => {
           alt="마이페이지"
           className="flex w-[3rem] h-[5rem]"
         />
-        <Image
-          src={ShoppingBasket}
-          alt="장바구니"
-          className="flex w-[3rem] h-[5rem]"
-        />
+        <Link href="/cart">
+          <Image
+            src={ShoppingBasket}
+            alt="장바구니"
+            className="flex w-[3rem] h-[5rem]"
+          />
+        </Link>
       </div>
     </header>
   );

@@ -6,6 +6,8 @@ import GoogleLogo from './google.svg';
 import KakaoLogo from './kakao.svg';
 import NaverLogo from './n.svg';
 import AppleLogo from './apple.svg';
+import ShoppingCart from './shoppingCart.svg';
+import Close from './close.svg';
 
 export {
   Category,
@@ -16,4 +18,6 @@ export {
   KakaoLogo,
   NaverLogo,
   AppleLogo,
+  ShoppingCart,
+  Close,
 };
