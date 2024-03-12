@@ -20,7 +20,7 @@ export interface AddressData {
     street: string;
     zipcode?: string;
     detail: string;
-    alias: string;
+    alias?: string;
   };
   isDefault: boolean;
 }

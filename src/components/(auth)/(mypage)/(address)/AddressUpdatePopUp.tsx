@@ -15,6 +15,8 @@ const STYLE_ALERT_CONTAINER =
   'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[12px] overflow-hidden z-alert w-[500px] max-w-[600px] min-h-[180px] px-12 py-[10px] box-border';
 const STYLE_BUTTON =
   'w-[400px] h-[50px] mt-[20px] mb-[10px] text-[16px] text-white bg-[#011B5B]';
+const STYLE_BUTTON_DELETE =
+  'w-[400px] h-[50px] mt-[4px] mb-[10px] text-[16px] text-#011B5B border-[1px] border-gray-400';
 
 const AddressUpdatePopUp = () => {
   const [authStateValue, setAuthStateValue] = useRecoilState(authState);
@@ -44,6 +46,10 @@ const AddressUpdatePopUp = () => {
     if (name === 'phoneNo') {
       setUpdatePhoneNo(value);
     }
+  };
+
+  const handleCheckboxChange = () => {
+    setUpdateDefault((prev) => !prev);
   };
 
   const handleSaveButtonClick = async () => {
@@ -79,6 +85,8 @@ const AddressUpdatePopUp = () => {
       }
     }
   };
+
+  const handleDeleteAddress = () => {};
 
   const closeAddressPopUp = () => {
     setAuthStateValue((prev) => ({
@@ -146,12 +154,29 @@ const AddressUpdatePopUp = () => {
                 onChange={handleNameAndPhoneChange}
               />
             </div>
+            {!isDefault && (
+              <div className="flex items-center w-full mt-4">
+                <input
+                  type="checkbox"
+                  className="w-[20px] h-[20px] mr-6"
+                  onChange={handleCheckboxChange}
+                />
+                <span className="text-[16px]">기본 배송지로 저장</span>
+              </div>
+            )}
           </div>
           <Button
             text="저장"
             style={STYLE_BUTTON}
             onClick={handleSaveButtonClick}
           />
+          {!isDefault && (
+            <Button
+              text="삭제"
+              style={STYLE_BUTTON_DELETE}
+              onClick={handleDeleteAddress}
+            />
+          )}
         </div>
       </div>
     </BackDrop>
