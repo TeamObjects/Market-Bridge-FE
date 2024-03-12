@@ -33,7 +33,10 @@ export const addNewAddress = async (data: AddressData) => {
   return response.json();
 };
 
-export const updateAddress = async (data: AddressData, id: number) => {
+export const updateAddress = async (
+  data: AddressData,
+  id: number | undefined,
+) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/member/address/${id}`,
     {

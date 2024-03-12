@@ -30,6 +30,12 @@ const AddressListItems = () => {
     queryFn: getAddressList,
   });
   const addressList = data?.data;
+  const defaultAddressId = addressList
+    ?.filter((v) => v.isDefault === true)
+    .map((v) => v.addressId)[0];
+  const defaultAddressItem = addressList?.filter(
+    (v) => v.addressId === defaultAddressId,
+  )[0];
 
   return (
     <>
@@ -43,7 +49,12 @@ const AddressListItems = () => {
       <ul>
         {addressList &&
           addressList.map((item) => (
-            <AddressListItem key={item.addressId} item={item} />
+            <AddressListItem
+              key={item.addressId}
+              item={item}
+              defaultAddressId={defaultAddressId}
+              defaultAddressItem={defaultAddressItem}
+            />
           ))}
       </ul>
     </>
