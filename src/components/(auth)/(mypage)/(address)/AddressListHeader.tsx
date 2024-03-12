@@ -12,13 +12,13 @@ interface AddressListHeaderProps {
   scriptUrl?: string;
 }
 
-export interface NewAddressData {
+export interface AddressData {
   addressValue: {
     phoneNo: string;
     name: string;
     city: string;
     street: string;
-    zipcode: string;
+    zipcode?: string;
     detail: string;
     alias: string;
   };

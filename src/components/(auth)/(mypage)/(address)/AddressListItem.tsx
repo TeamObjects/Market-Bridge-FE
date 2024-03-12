@@ -12,7 +12,7 @@ interface AddressListItemProps {
 }
 
 const AddressListItem = ({ item }: AddressListItemProps) => {
-  const { isDefault } = item;
+  const { isDefault, addressId } = item;
   const { name, phoneNo, city, street, detail } = item.addressValue;
   const address = `${city} ${street} ${detail}`;
 
@@ -26,6 +26,7 @@ const AddressListItem = ({ item }: AddressListItemProps) => {
         address,
         name,
         phoneNo,
+        addressId,
         isDefault,
         isUpdate: true,
       },

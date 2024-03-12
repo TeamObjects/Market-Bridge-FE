@@ -9,6 +9,7 @@ interface AuthState {
     isRegistered?: boolean;
     isUpdate?: boolean;
     isDefault?: boolean;
+    addressId?: number;
     address: string;
     name: string;
     phoneNo: string;
@@ -55,6 +56,7 @@ const authState = atom<AuthState>({
       isRegistered: true,
       isUpdate: false,
       isDefault: false,
+      addressId: 0,
       address: '',
       name: '',
       phoneNo: '',
