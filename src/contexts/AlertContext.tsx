@@ -17,6 +17,7 @@ type AlertOptions = Omit<AlertProps, 'open'>;
 
 export interface AlertContextValue {
   open: (options: AlertOptions) => void;
+  close: () => void;
 }
 
 interface AlertContextProviderProps {
@@ -47,17 +48,14 @@ export const AlertContextProvider = ({
     ({ onLeftButtonClick, onRightButtonClick, ...options }: AlertOptions) => {
       setAlertState({
         ...options,
-        onLeftButtonClick: () => {
-          close();
-        },
+        onLeftButtonClick: () => {},
         onRightButtonClick: () => {
-          close();
           onRightButtonClick && onRightButtonClick();
         },
         open: true,
       });
     },
-    [close],
+    [],
   );
 
   useEffect(() => {
@@ -78,7 +76,7 @@ export const AlertContextProvider = ({
     };
   }, []);
 
-  const values = useMemo(() => ({ open }), [open]);
+  const values = useMemo(() => ({ open, close }), [open, close]);
 
   return (
     <AlertContext.Provider value={values}>

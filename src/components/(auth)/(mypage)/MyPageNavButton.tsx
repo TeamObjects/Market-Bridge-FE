@@ -24,7 +24,7 @@ const MyPageNavButton = ({ menu }: MyPageNavButtonProps) => {
   const isActive = path.includes(`/mypage/${menu.path}`);
 
   return (
-    <li className="flex justify-between items-center py-[15px] pl-[20px] pr-[13px] border-[1px] border-gray-100 cursor-pointer hover:bg-gray-50">
+    <li className="flex justify-between items-center py-[15px] pl-[20px] pr-[13px] border-[1px] border-gray-100 cursor-pointer hover:bg-gray-50 hover:text-[#03BAF2]">
       <Button
         text={menu.title}
         style={`${STYLE_BUTTON_WHITE} ${isActive ? 'text-[#03BAF2]' : ''}`}
