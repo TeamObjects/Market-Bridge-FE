@@ -1,15 +1,19 @@
+import { deleteAddress, updateAddress } from '@/api/mypageApi';
+
+import { AddressData } from '@/components/(auth)/(mypage)/(address)/AddressListHeader';
 import BackDrop from '@/components/shared/BackDrop';
 import Button from '@/components/shared/Button';
+
+import useAlertContext from '@/hooks/useAlertContext';
 
 import authState from '@/recoil/authAtom';
 import { useRecoilState } from 'recoil';
 
+import { useQueryClient } from '@tanstack/react-query';
+
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import splitAddress from '@/utils/splitAddress';
-import { AddressData } from './AddressListHeader';
-import { updateAddress } from '@/api/mypageApi';
-import { useQueryClient } from '@tanstack/react-query';
 
 const STYLE_ALERT_CONTAINER =
   'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[12px] overflow-hidden z-alert w-[500px] max-w-[600px] min-h-[180px] px-12 py-[10px] box-border';
@@ -31,6 +35,8 @@ const AddressUpdatePopUp = () => {
   const [updateDefault, setUpdateDefault] = useState(false);
 
   const queryClient = useQueryClient();
+
+  const { open, close } = useAlertContext();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(e.target.value);
@@ -86,7 +92,27 @@ const AddressUpdatePopUp = () => {
     }
   };
 
-  const handleDeleteAddress = () => {};
+  const handleDeleteAddress = () => {
+    open({
+      title: '삭제하시겠습니까?',
+      leftButtonLabel: '취소',
+      rightButtonLabel: '확인',
+      onLeftButtonClick: () => {
+        close();
+      },
+      onRightButtonClick: async () => {
+        if (addressId) {
+          const response = await deleteAddress(addressId);
+
+          if (response.code === 200) {
+            queryClient.invalidateQueries({ queryKey: ['address'] });
+            close();
+            closeAddressPopUp();
+          }
+        }
+      },
+    });
+  };
 
   const closeAddressPopUp = () => {
     setAuthStateValue((prev) => ({

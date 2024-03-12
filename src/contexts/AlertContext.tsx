@@ -1,6 +1,7 @@
 'use client';
 
 import Alert from '@/components/shared/Alert';
+
 import {
   ComponentProps,
   ReactNode,
@@ -48,7 +49,9 @@ export const AlertContextProvider = ({
     ({ onLeftButtonClick, onRightButtonClick, ...options }: AlertOptions) => {
       setAlertState({
         ...options,
-        onLeftButtonClick: () => {},
+        onLeftButtonClick: () => {
+          onLeftButtonClick && onLeftButtonClick();
+        },
         onRightButtonClick: () => {
           onRightButtonClick && onRightButtonClick();
         },
