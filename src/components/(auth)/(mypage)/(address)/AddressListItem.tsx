@@ -4,6 +4,8 @@ import { RiCheckboxCircleLine } from 'react-icons/ri';
 import { TfiPencil } from 'react-icons/tfi';
 
 import { AddressItem } from '@/components/(auth)/(mypage)/(address)/AddressListItems';
+import { useSetRecoilState } from 'recoil';
+import authState from '@/recoil/authAtom';
 
 interface AddressListItemProps {
   item: AddressItem;
@@ -13,6 +15,22 @@ const AddressListItem = ({ item }: AddressListItemProps) => {
   const { isDefault } = item;
   const { name, phoneNo, city, street, detail } = item.addressValue;
   const address = `${city} ${street} ${detail}`;
+
+  const setAuthStateValue = useSetRecoilState(authState);
+
+  const handlePencilClick = () => {
+    setAuthStateValue((prev) => ({
+      ...prev,
+      addAddress: {
+        ...prev.addAddress,
+        address,
+        name,
+        phoneNo,
+        isDefault,
+        isUpdate: true,
+      },
+    }));
+  };
 
   return (
     <li className="flex items-center h-[89px] text-[18px] text-center border-b-[1px] border-gray-300">
@@ -27,7 +45,10 @@ const AddressListItem = ({ item }: AddressListItemProps) => {
       <span className="w-[15%]">{name}</span>
       <span className="w-[20%]">{phoneNo}</span>
       <div className="flex justify-center w-[7%]">
-        <TfiPencil className="w-[25px] h-[25px] text-gray-300 cursor-pointer hover:text-[#011B5B]" />
+        <TfiPencil
+          className="w-[25px] h-[25px] text-gray-300 cursor-pointer hover:text-[#011B5B]"
+          onClick={handlePencilClick}
+        />
       </div>
     </li>
   );

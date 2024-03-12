@@ -3,7 +3,7 @@
 import Button from '@/components/shared/Button';
 
 import authState from '@/recoil/authAtom';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 import { useState } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
@@ -28,7 +28,7 @@ export interface NewAddressData {
 const STYLE_BUTTON = 'mr-6 text-[18px] font-bold';
 
 const AddressListHeader = ({ scriptUrl }: AddressListHeaderProps) => {
-  const [_, setAuthStateValue] = useRecoilState(authState);
+  const setAuthStateValue = useSetRecoilState(authState);
   const [zipcode, setZipcode] = useState('');
 
   const openModal = useDaumPostcodePopup(scriptUrl);
