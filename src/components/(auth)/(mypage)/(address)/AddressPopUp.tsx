@@ -14,24 +14,12 @@ import { useRecoilState } from 'recoil';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { ChangeEvent, useEffect, useState } from 'react';
+import splitAddress from '@/utils/splitAddress';
 
 const STYLE_ALERT_CONTAINER =
   'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[12px] overflow-hidden z-alert w-[500px] max-w-[600px] min-h-[180px] px-12 py-[10px] box-border';
 const STYLE_BUTTON =
   'w-[400px] h-[50px] mb-[10px] text-[16px] text-white bg-[#011B5B]';
-
-const splitAddress = (address: string) => {
-  const firstSpaceIndex = address.indexOf(' ');
-  const city = address.slice(0, firstSpaceIndex);
-
-  const remainingAddress = address.slice(firstSpaceIndex + 1);
-  const secondSpaceIndex = remainingAddress.indexOf(' ');
-  const street = remainingAddress.slice(0, secondSpaceIndex);
-
-  const detail = remainingAddress.slice(secondSpaceIndex + 1);
-
-  return { city, street, detail };
-};
 
 const AddressPopUp = () => {
   const [authStateValue, setAuthStateValue] = useRecoilState(authState);
@@ -113,7 +101,7 @@ const AddressPopUp = () => {
   };
 
   useEffect(() => {
-    setMainAddress(authStateValue.addAddress.address);
+    setMainAddress(authStateValue.addAddress?.address);
   }, []);
 
   return (
