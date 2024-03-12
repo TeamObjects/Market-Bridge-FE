@@ -7,6 +7,9 @@ import { useRecoilState } from 'recoil';
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import splitAddress from '@/utils/splitAddress';
+import { AddressData } from './AddressListHeader';
+import { updateAddress } from '@/api/mypageApi';
+import { useQueryClient } from '@tanstack/react-query';
 
 const STYLE_ALERT_CONTAINER =
   'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[12px] overflow-hidden z-alert w-[500px] max-w-[600px] min-h-[180px] px-12 py-[10px] box-border';
@@ -15,13 +18,17 @@ const STYLE_BUTTON =
 
 const AddressUpdatePopUp = () => {
   const [authStateValue, setAuthStateValue] = useRecoilState(authState);
-  const { isDefault, address, name, phoneNo } = authStateValue.addAddress;
+  const { isDefault, address, name, phoneNo, addressId } =
+    authStateValue.addAddress;
   const { city, street, detail } = splitAddress(address);
   const mainAddress = `${city} ${street}`;
 
   const [detailAddress, setDetailAddress] = useState('');
   const [updateName, setUpdateName] = useState('');
   const [updatePhoneNo, setUpdatePhoneNo] = useState('');
+  const [updateDefault, setUpdateDefault] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDetailAddress(e.target.value);
@@ -39,7 +46,39 @@ const AddressUpdatePopUp = () => {
     }
   };
 
-  const handleSaveButtonClick = async () => {};
+  const handleSaveButtonClick = async () => {
+    const dataToSubmit = {
+      addressValue: {
+        phoneNo: updatePhoneNo,
+        name: updateName,
+        city,
+        street,
+        detail: detailAddress,
+        alias: '별칭',
+      },
+      isDefault: updateDefault,
+    } as AddressData;
+
+    if (addressId) {
+      const response = await updateAddress(dataToSubmit, addressId);
+
+      if (response.code === 200) {
+        queryClient.invalidateQueries({ queryKey: ['address'] });
+        setAuthStateValue((prev) => ({
+          ...prev,
+          addAddress: {
+            isRegistered: true,
+            isUpdate: false,
+            address: '',
+            addressId: 0,
+            name: '',
+            phoneNo: '',
+            zipcode: '',
+          },
+        }));
+      }
+    }
+  };
 
   const closeAddressPopUp = () => {
     setAuthStateValue((prev) => ({

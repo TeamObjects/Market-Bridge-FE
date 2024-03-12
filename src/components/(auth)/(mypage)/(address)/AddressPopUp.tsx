@@ -2,7 +2,7 @@
 
 import { addNewAddress } from '@/api/mypageApi';
 
-import { NewAddressData } from '@/components/(auth)/(mypage)/(address)/AddressListHeader';
+import { AddressData } from '@/components/(auth)/(mypage)/(address)/AddressListHeader';
 import BackDrop from '@/components/shared/BackDrop';
 import Button from '@/components/shared/Button';
 
@@ -64,7 +64,7 @@ const AddressPopUp = () => {
         alias: '별칭',
       },
       isDefault: false,
-    } as NewAddressData;
+    } as AddressData;
 
     if (detailAddress !== '' && name !== '' && phoneNo !== '') {
       const response = await addNewAddress(dataToSubmit);
