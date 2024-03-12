@@ -1,4 +1,5 @@
 import { AddressData } from '@/components/(auth)/(mypage)/(address)/AddressListHeader';
+
 import { getLocalToken } from '@/utils/localToken';
 
 const token = getLocalToken();
@@ -46,6 +47,21 @@ export const updateAddress = async (
         Authorization: `bearer ${token}`,
       },
       body: JSON.stringify(data),
+    },
+  );
+
+  return response.json();
+};
+
+export const deleteAddress = async (id: number | undefined) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/address/${id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}`,
+      },
     },
   );
 

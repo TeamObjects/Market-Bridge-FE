@@ -2,10 +2,10 @@
 
 import AddressListItems from '@/components/(auth)/(mypage)/(address)/AddressListItems';
 import AddressPopUp from '@/components/(auth)/(mypage)/(address)/AddressPopUp';
-import authState from '@/recoil/authAtom';
+import AddressUpdatePopUp from '@/components/(auth)/(mypage)/(address)/AddressUpdatePopUp';
 
+import authState from '@/recoil/authAtom';
 import { useRecoilValue } from 'recoil';
-import AddressUpdatePopUp from './AddressUpdatePopUp';
 
 const AddressList = () => {
   const authStateValue = useRecoilValue(authState);

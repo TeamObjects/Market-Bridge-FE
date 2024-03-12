@@ -20,7 +20,7 @@ const STYLE_ALERT_CONTAINER =
   'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-[12px] overflow-hidden z-alert w-[35%] max-w-[600px] min-h-[180px] px-12 py-[10px] box-border ';
 
 const STYLE_BUTTON_DEFAULT =
-  'w-[100%] min-w-[300px] xs:min-w-[200px] h-[44px] xs:h-[40px] p-6 mb-4 text-[18px] text-[#011B5B]';
+  'w-[100%] min-w-[100px] xs:min-w-[200px] h-[44px] xs:h-[40px] p-6 mb-4 text-[18px] text-[#011B5B]';
 
 const Alert = ({
   open,
