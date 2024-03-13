@@ -29,6 +29,7 @@ const AlertContext = createContext<AlertContextValue | undefined>(undefined);
 
 const defaultValues: AlertProps = {
   open: false,
+  close: false,
   title: null,
   description: null,
   onLeftButtonClick: () => {},

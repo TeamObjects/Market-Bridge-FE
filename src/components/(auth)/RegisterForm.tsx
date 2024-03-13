@@ -22,7 +22,7 @@ export interface UserInfo {
 
 const RegisterForm = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
-  const { open } = useAlertContext();
+  const { open, close } = useAlertContext();
 
   const { mutate: register } = useMutation({
     mutationFn: registerUser,
@@ -39,6 +39,9 @@ const RegisterForm = ({ children }: { children: ReactNode }) => {
     if (!isAgree) {
       open({
         title: '필수 동의사항에 체크해주세요.',
+        onRightButtonClick: () => {
+          close();
+        },
       });
     } else {
       register(values);
