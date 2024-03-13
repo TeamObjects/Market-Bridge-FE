@@ -5,6 +5,7 @@ import { ReactNode } from 'react';
 
 interface AlertProps {
   open?: boolean;
+  close?: boolean;
   title?: React.ReactNode;
   description?: React.ReactNode;
   leftButtonLabel?: string | undefined;

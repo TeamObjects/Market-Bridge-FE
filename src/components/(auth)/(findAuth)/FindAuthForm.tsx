@@ -20,7 +20,7 @@ const FindAuthForm = ({ children }: FindAuthFormProps) => {
 
   const router = useRouter();
   const path = usePathname();
-  const { open } = useAlertContext();
+  const { open, close } = useAlertContext();
 
   const openAlert = (
     code: number,
@@ -34,6 +34,7 @@ const FindAuthForm = ({ children }: FindAuthFormProps) => {
         description,
         onRightButtonClick: () => {
           console.error(errorCode);
+          close();
         },
       });
     }
