@@ -5,6 +5,7 @@ interface AuthState {
   isDuplicateEmail: boolean;
   foundId: string;
   memberId: number;
+  hasAddress?: boolean;
   addAddress: {
     isRegistered?: boolean;
     isUpdate?: boolean;
@@ -52,6 +53,7 @@ const authState = atom<AuthState>({
     isDuplicateEmail: false,
     foundId: '',
     memberId: 0,
+    hasAddress: false,
     addAddress: {
       isRegistered: true,
       isUpdate: false,
