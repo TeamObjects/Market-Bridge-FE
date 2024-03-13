@@ -37,6 +37,8 @@ const AddressListItems = () => {
     (v) => v.addressId === defaultAddressId,
   )[0];
 
+  console.log(addressList);
+
   return (
     <>
       <nav className="flex text-[16px] text-center border-b-[1px] border-black pb-6">
@@ -49,12 +51,7 @@ const AddressListItems = () => {
       <ul>
         {addressList &&
           addressList.map((item) => (
-            <AddressListItem
-              key={item.addressId}
-              item={item}
-              defaultAddressId={defaultAddressId}
-              defaultAddressItem={defaultAddressItem}
-            />
+            <AddressListItem key={item.addressId} item={item} />
           ))}
       </ul>
     </>

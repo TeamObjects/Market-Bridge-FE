@@ -8,18 +8,13 @@ import { useSetRecoilState } from 'recoil';
 import authState from '@/recoil/authAtom';
 import { updateAddress } from '@/api/mypageApi';
 import useAlertContext from '@/hooks/useAlertContext';
+import { useQueryClient } from '@tanstack/react-query';
 
 interface AddressListItemProps {
   item: AddressItem;
-  defaultAddressId: number | undefined;
-  defaultAddressItem: AddressItem | undefined;
 }
 
-const AddressListItem = ({
-  item,
-  defaultAddressId,
-  defaultAddressItem,
-}: AddressListItemProps) => {
+const AddressListItem = ({ item }: AddressListItemProps) => {
   const { isDefault, addressId } = item;
   const {
     name = '',
@@ -27,16 +22,13 @@ const AddressListItem = ({
     city = '',
     street = '',
     detail = '',
+    zipcode = '',
+    alias = '',
   } = item.addressValue || {};
-  const {
-    name: defaultAddressItemName = '',
-    phoneNo: defaultAddressItemPhoneNo = '',
-    city: defaultAddressItemCity = '',
-    street: defaultAddressItemStreet = '',
-    detail: defaultAddressItemDetail = '',
-  } = defaultAddressItem?.addressValue || {};
 
   const address = `${city} ${street} ${detail}`;
+
+  const queryClient = useQueryClient();
 
   const { open, close } = useAlertContext();
 
@@ -58,32 +50,22 @@ const AddressListItem = ({
   };
 
   const handleUpdateDefault = async () => {
-    const defaultSubmit = {
-      addressValue: {
-        phoneNo,
-        name,
-        city,
-        street,
-        detail,
-      },
+    const dataToSubmit = {
+      phoneNo,
+      name,
+      city,
+      street,
+      detail,
+      zipcode,
+      alias,
       isDefault: true,
     };
 
-    const notDefaultSubmit = {
-      addressValue: {
-        phoneNo: defaultAddressItemPhoneNo,
-        name: defaultAddressItemName,
-        city: defaultAddressItemCity,
-        street: defaultAddressItemStreet,
-        detail: defaultAddressItemDetail,
-      },
-      isDefault: false,
-    };
-
-    await updateAddress(notDefaultSubmit, defaultAddressId);
-    const response = await updateAddress(defaultSubmit, addressId);
+    const response = await updateAddress(dataToSubmit, addressId);
 
     if (response.code === 200) {
+      queryClient.invalidateQueries({ queryKey: ['address'] });
+
       open({
         title: '배송지 선택이 완료 되었습니다.',
         rightButtonLabel: '확인',

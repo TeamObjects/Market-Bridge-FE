@@ -60,18 +60,18 @@ const AddressUpdatePopUp = () => {
 
   const handleSaveButtonClick = async () => {
     const dataToSubmit = {
-      addressValue: {
-        phoneNo: updatePhoneNo,
-        name: updateName,
-        city,
-        street,
-        detail: detailAddress,
-        alias: '별칭',
-      },
+      phoneNo: updatePhoneNo,
+      name: updateName,
+      city,
+      street,
+      detail: detailAddress,
+      alias: '별칭',
       isDefault: updateDefault,
     } as AddressData;
 
     if (addressId) {
+      console.log('dataToSubmit', dataToSubmit);
+
       const response = await updateAddress(dataToSubmit, addressId);
 
       if (response.code === 200) {
