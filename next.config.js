@@ -1,7 +1,14 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   images: {
-    domains: ['thumbnail8.coupangcdn.com', 'thumbnail6.coupangcdn.com'],
+    domains: (() => {
+      const domains = [];
+      for (let i = 0; i < 49; i++) {
+        domains.push(`thumbnail${i}.coupangcdn.com`);
+      }
+      return domains;
+    })(),
   },
 };
 
