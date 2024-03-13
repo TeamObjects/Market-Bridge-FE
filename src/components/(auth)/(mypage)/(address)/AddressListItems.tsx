@@ -3,8 +3,11 @@
 import { getAddressList } from '@/api/mypageApi';
 
 import AddressListItem from '@/components/(auth)/(mypage)/(address)/AddressListItem';
+import authState from '@/recoil/authAtom';
 
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 export interface AddressItem {
   addressId: number;
@@ -30,14 +33,18 @@ const AddressListItems = () => {
     queryFn: getAddressList,
   });
   const addressList = data?.data;
-  const defaultAddressId = addressList
-    ?.filter((v) => v.isDefault === true)
-    .map((v) => v.addressId)[0];
-  const defaultAddressItem = addressList?.filter(
-    (v) => v.addressId === defaultAddressId,
-  )[0];
 
-  console.log(addressList);
+  const setAuthStateValue = useSetRecoilState(authState);
+
+  useEffect(() => {
+    if (addressList) {
+      if (addressList.length > 0) {
+        setAuthStateValue((prev) => ({ ...prev, hasAddress: true }));
+      } else {
+        setAuthStateValue((prev) => ({ ...prev, hasAddress: false }));
+      }
+    }
+  }, [addressList, setAuthStateValue]);
 
   return (
     <>

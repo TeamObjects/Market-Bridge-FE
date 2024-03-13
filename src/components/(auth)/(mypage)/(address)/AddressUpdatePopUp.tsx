@@ -66,7 +66,7 @@ const AddressUpdatePopUp = () => {
       street,
       detail: detailAddress,
       alias: '별칭',
-      isDefault: updateDefault,
+      isDefault: isDefault ? true : updateDefault,
     } as AddressData;
 
     if (addressId) {

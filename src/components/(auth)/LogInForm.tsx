@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation';
 
 import { ReactNode } from 'react';
 import useAlertContext from '@/hooks/useAlertContext';
+import { useSetRecoilState } from 'recoil';
+import authState from '@/recoil/authAtom';
 
 export type LoginUserInfo = {
   email: UserInfo['email'];
@@ -20,6 +22,8 @@ export type LoginUserInfo = {
 };
 
 const LogInForm = ({ children }: { children: ReactNode }) => {
+  const setAuthStateValue = useSetRecoilState(authState);
+
   const router = useRouter();
   const { open, close } = useAlertContext();
 
@@ -28,6 +32,7 @@ const LogInForm = ({ children }: { children: ReactNode }) => {
     onSuccess: ({ code, data: { accessToken } }) => {
       if (code === 200) {
         setLocalToken(accessToken);
+        setAuthStateValue((prev) => ({ ...prev, isLoggedIn: true }));
         router.push('/');
       }
     },
