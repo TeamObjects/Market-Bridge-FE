@@ -52,19 +52,18 @@ const AddressPopUp = () => {
   const handleSaveButtonClick = async () => {
     const totalAddress = `${mainAddress} ${detailAddress}`;
     const zipcode = authStateValue.addAddress.zipcode;
+    const isRegistered = authStateValue.addAddress.isRegistered;
     const { city, street, detail } = splitAddress(totalAddress);
 
     const dataToSubmit = {
-      addressValue: {
-        phoneNo,
-        name,
-        city,
-        street,
-        zipcode,
-        detail,
-        alias: '별칭',
-      },
-      isDefault: false,
+      phoneNo,
+      name,
+      city,
+      street,
+      zipcode,
+      detail,
+      alias: '별칭',
+      isDefault: isRegistered ? false : true,
     } as AddressData;
 
     if (detailAddress !== '' && name !== '' && phoneNo !== '') {
