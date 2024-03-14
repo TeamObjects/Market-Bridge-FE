@@ -1,3 +1,5 @@
+'use client';
+
 import { RiCheckboxCircleLine } from 'react-icons/ri';
 import { TfiPencil } from 'react-icons/tfi';
 
