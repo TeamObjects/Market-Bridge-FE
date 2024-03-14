@@ -1,5 +1,13 @@
 import { atom, DefaultValue } from 'recoil';
 
+export interface MyInfo {
+  email: string;
+  name: string;
+  phoneNo: string;
+  password?: string;
+  isAgree: boolean;
+  isAlert: boolean;
+}
 interface AuthState {
   isLoggedIn: boolean;
   isDuplicateEmail: boolean;
@@ -16,6 +24,7 @@ interface AuthState {
     phoneNo: string;
     zipcode: string;
   };
+  myInfo: MyInfo;
 }
 
 const persistAuthState =
@@ -63,6 +72,13 @@ const authState = atom<AuthState>({
       name: '',
       phoneNo: '',
       zipcode: '',
+    },
+    myInfo: {
+      email: '',
+      name: '',
+      phoneNo: '',
+      isAgree: false,
+      isAlert: false,
     },
   },
   effects_UNSTABLE: [persistAuthState('authState')],
