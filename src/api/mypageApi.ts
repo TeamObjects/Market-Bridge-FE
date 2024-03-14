@@ -67,3 +67,31 @@ export const deleteAddress = async (id: number | undefined) => {
 
   return response.json();
 };
+
+export const findEmailInfo = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/account-email`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}`,
+      },
+    },
+  );
+
+  return response.json();
+};
+
+export const getAccountInfo = async (password: string) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/account-info?password=${password}`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}`,
+      },
+    },
+  );
+
+  return response.json();
+};

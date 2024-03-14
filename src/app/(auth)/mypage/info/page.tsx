@@ -8,8 +8,6 @@ const MyInfo = () => {
   return (
     <MyBridgePage header={<InfoHeader />} divider={<MyBridgeDivider />}>
       <InfoForm />
-      <div className="h-[1px] mt-6 bg-gray-300" />
-      <InfoButton />
     </MyBridgePage>
   );
 };
