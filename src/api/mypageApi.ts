@@ -1,5 +1,7 @@
 import { AddressData } from '@/components/(auth)/(mypage)/(address)/AddressListHeader';
 
+import { MyInfo } from '@/recoil/authAtom';
+
 import { getLocalToken } from '@/utils/localToken';
 
 const token = getLocalToken();
@@ -90,6 +92,22 @@ export const getAccountInfo = async (password: string) => {
         'Content-Type': 'application/json',
         Authorization: `bearer ${token}`,
       },
+    },
+  );
+
+  return response.json();
+};
+
+export const updateAccountInfo = async (data: MyInfo) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/member/account-info`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `bearer ${token}`,
+      },
+      body: JSON.stringify(data),
     },
   );
 

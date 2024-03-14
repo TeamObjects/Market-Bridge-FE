@@ -2,18 +2,23 @@
 
 import { findEmailInfo, getAccountInfo } from '@/api/mypageApi';
 
+import InfoButton from '@/components/(auth)/(mypage)/(info)/InfoButton';
 import InfoTextField from '@/components/(auth)/(mypage)/(info)/InfoTextField';
 
+import useAlertContext from '@/hooks/useAlertContext';
+
 import { useQuery } from '@tanstack/react-query';
+
+import authState from '@/recoil/authAtom';
+import { useSetRecoilState } from 'recoil';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { useRouter } from 'next/navigation';
-import InfoButton from './InfoButton';
-import useAlertContext from '@/hooks/useAlertContext';
 
 const InfoForm = () => {
   const [password, setPassword] = useState('');
+  const setAuthState = useSetRecoilState(authState);
 
   const router = useRouter();
 
@@ -22,12 +27,7 @@ const InfoForm = () => {
     queryFn: findEmailInfo,
   });
 
-  const email = data?.data.email;
-
-  const { data: accountData } = useQuery({
-    queryKey: ['account'],
-    queryFn: () => getAccountInfo(password),
-  });
+  const email = data && data?.data.email;
 
   const { open, close } = useAlertContext();
 
@@ -40,6 +40,8 @@ const InfoForm = () => {
 
     if (password.trim().length > 0) {
       const response = await getAccountInfo(password);
+
+      setAuthState((prev) => ({ ...prev, myInfo: response.data }));
 
       if (response.code === 200) {
         router.push('/mypage/info/modify');
