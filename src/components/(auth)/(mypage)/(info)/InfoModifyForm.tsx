@@ -75,12 +75,9 @@ const InfoModifyForm = () => {
 
     if (!isPasswordMatch) {
       const response = await updateAccountInfo({
-        email: authStateValue.myInfo.email,
         name,
         phoneNo,
-        password: newPassword,
-        isAgree: true,
-        isAlert: true,
+        password: newPassword === '' ? null : newPassword,
       });
 
       if (response.code === 200) {
@@ -90,8 +87,6 @@ const InfoModifyForm = () => {
             email: '',
             name: '',
             phoneNo: '',
-            isAgree: false,
-            isAlert: false,
           },
         }));
 

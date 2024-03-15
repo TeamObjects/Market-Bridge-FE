@@ -27,7 +27,7 @@ const InfoForm = () => {
     queryFn: findEmailInfo,
   });
 
-  const email = data && data?.data.email;
+  const email = data && data?.data?.email;
 
   const { open, close } = useAlertContext();
 
