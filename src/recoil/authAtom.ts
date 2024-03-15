@@ -1,12 +1,10 @@
 import { atom, DefaultValue } from 'recoil';
 
 export interface MyInfo {
-  email: string;
+  email?: string;
   name: string;
   phoneNo: string;
-  password?: string;
-  isAgree: boolean;
-  isAlert: boolean;
+  password?: string | null;
 }
 interface AuthState {
   isLoggedIn: boolean;
@@ -77,8 +75,6 @@ const authState = atom<AuthState>({
       email: '',
       name: '',
       phoneNo: '',
-      isAgree: false,
-      isAlert: false,
     },
   },
   effects_UNSTABLE: [persistAuthState('authState')],
