@@ -8,6 +8,7 @@ import NaverLogo from './n.svg';
 import AppleLogo from './apple.svg';
 import ShoppingCart from './shoppingCart.svg';
 import Close from './close.svg';
+import Location from './location.svg';
 
 export {
   Category,
@@ -20,4 +21,5 @@ export {
   AppleLogo,
   ShoppingCart,
   Close,
+  Location,
 };

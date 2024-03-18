@@ -1,3 +1,4 @@
+import CartInformation from '@/components/(cart)/CartInformation';
 import CartList from '@/components/(cart)/CartList';
 
 const Cart = () => {
@@ -8,9 +9,7 @@ const Cart = () => {
       </div>
       <div className="flex w-[100%] h-[80%]">
         <CartList />
-        <aside className="flex w-[30%] h-[100%]">
-          <p>adf</p>
-        </aside>
+        <CartInformation />
       </div>
     </main>
   );
