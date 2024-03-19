@@ -60,6 +60,18 @@ const CartList = () => {
     deleteCartMutation.mutate(cartId);
   };
 
+  const handleDeleteSelectedItems = () => {
+    const selectedItems = Object.entries(checkedItems)
+      .filter(([_, isChecked]) => isChecked)
+      .map(([itemId, _]) => Number(itemId));
+
+    if (selectedItems.length > 0) {
+      selectedItems.forEach((itemId) => {
+        handleDeleteItem(itemId);
+      });
+    }
+  };
+
   useEffect(() => {
     if (data) {
       const initialCheckedItems: { [key: number]: boolean } = {};
@@ -83,7 +95,7 @@ const CartList = () => {
         <label htmlFor="selectAllCheckbox">
           전체선택 ({checkedItemCount}/{data?.data?.content.length || 0})
         </label>
-        <p className="cursor-pointer" onClick={() => alert('준비중입니다')}>
+        <p className="cursor-pointer" onClick={handleDeleteSelectedItems}>
           선택삭제
         </p>
       </div>
