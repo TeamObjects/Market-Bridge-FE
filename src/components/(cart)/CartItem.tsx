@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { ShoppingCart, Close } from '../../../public/svgs';
 import { Content } from '@/interfaces/cart';
 import { HUNDRED } from '@/constants/constants';
+import { deliveryFeeState } from '@/recoil/cartAtom';
+import { useRecoilState } from 'recoil';
 
 interface CartItemProps {
   items: Content[];
@@ -18,6 +20,8 @@ const CartItem: React.FC<CartItemProps> = ({
   handleQuantityChange,
   handleDeleteItem,
 }) => {
+  const [deliveryFee, setDeliveryFee] = useRecoilState(deliveryFeeState);
+
   return (
     <div className="flex flex-col w-[100%] h-[94%] border-y-2">
       <div className="flex w-[15%] h-[10%] items-center justify-around text-[20px]">
@@ -32,6 +36,7 @@ const CartItem: React.FC<CartItemProps> = ({
           const discountRate = (HUNDRED - item.discountRate) / HUNDRED;
           discountedPrice = item?.productPrice * discountRate * item?.quantity;
         }
+        setDeliveryFee(deliveryFee + item.deliveryFee);
 
         return (
           <div

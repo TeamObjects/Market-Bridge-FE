@@ -1,6 +1,10 @@
 'use client';
+import { deliveryFeeState } from '@/recoil/cartAtom';
+import { useRecoilState } from 'recoil';
 
 const CartPayInformation = () => {
+  const [deliveryFee, _] = useRecoilState(deliveryFeeState);
+
   return (
     <>
       <div className="flex flex-col w-[80%] h-[50%] border bg-[#FAFAFA] items-center text-2xl">
@@ -15,7 +19,7 @@ const CartPayInformation = () => {
           </div>
           <div className="flex w-[100%] h-[25%] justify-between items-center">
             <p>배송비</p>
-            <p>61,880원</p>
+            <p>{deliveryFee.toLocaleString()}원</p>
           </div>
         </div>
         <div className="flex w-[90%] h-[20%] justify-between items-center">
