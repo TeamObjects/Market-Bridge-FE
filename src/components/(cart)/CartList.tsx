@@ -6,6 +6,9 @@ import { changeQuantity, deleteCart, fetchCart } from '@/api/cartApi';
 import { Content } from '@/interfaces/cart';
 
 const CartList = () => {
+  const [checkedItems, setCheckedItems] = useState<{ [key: number]: boolean }>(
+    {},
+  );
   const { data, refetch } = useQuery({
     queryKey: ['getCartList'],
     queryFn: () => fetchCart(),
@@ -26,9 +29,6 @@ const CartList = () => {
     onSuccess: () => refetch(),
   });
 
-  const [checkedItems, setCheckedItems] = useState<{ [key: number]: boolean }>(
-    {},
-  );
   const checkedItemCount = Object.values(checkedItems).filter(Boolean).length;
 
   const handleAllCheckboxChange = () => {
