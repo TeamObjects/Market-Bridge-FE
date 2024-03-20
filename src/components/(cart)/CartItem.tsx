@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { ShoppingCart, Close } from '../../../public/svgs';
 import { Content } from '@/interfaces/cart';
+import { HUNDRED } from '@/constants/constants';
 
 interface CartItemProps {
   items: Content[];
@@ -24,6 +25,14 @@ const CartItem: React.FC<CartItemProps> = ({
         <p>상품</p>
       </div>
       {items?.map((item: Content) => {
+        let discountedPrice = item?.productPrice * item?.quantity;
+        const originalPrice = discountedPrice;
+
+        if (item.discountRate !== 0) {
+          const discountRate = (HUNDRED - item.discountRate) / HUNDRED;
+          discountedPrice = item?.productPrice * discountRate * item?.quantity;
+        }
+
         return (
           <div
             key={item?.cartId}
@@ -52,7 +61,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 {item?.optionNames}
               </p>
             </div>
-            <div className="flex w-[15%] justify-around text-[14px] border">
+            <div className="flex w-[10%] justify-around text-[14px] border">
               <div
                 className="flex w-[30%] justify-center border-r cursor-pointer"
                 onClick={() => {
@@ -71,8 +80,26 @@ const CartItem: React.FC<CartItemProps> = ({
                 +
               </div>
             </div>
-            <p className="flex w-[15%] justify-center text-[14px]">
-              {(item?.productPrice * item?.quantity).toLocaleString()}원
+            <p className="flex flex-col w-[20%] text-[14px]">
+              {item?.discountRate === 0 ? (
+                <strong className="flex w-[full] justify-center">
+                  {discountedPrice.toLocaleString()}원
+                </strong>
+              ) : (
+                <>
+                  <div className="flex w-[full] ">
+                    <del className="flex w-[50%] text-slate-400 justify-center">
+                      {originalPrice.toLocaleString()}원
+                    </del>
+                    <p className="flex w-[50%] text-red-600 ">
+                      {item?.discountRate}% 할인
+                    </p>
+                  </div>
+                  <strong className="flex justify-center">
+                    {discountedPrice.toLocaleString()}원
+                  </strong>
+                </>
+              )}
             </p>
             <Image
               src={Close}
