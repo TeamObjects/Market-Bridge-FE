@@ -2,8 +2,9 @@ import Image from 'next/image';
 import { ShoppingCart, Close } from '../../../public/svgs';
 import { Content } from '@/interfaces/cart';
 import { HUNDRED } from '@/constants/constants';
-import { deliveryFeeState } from '@/recoil/cartAtom';
+import { deliveryFeeState, goodsAmountState } from '@/recoil/cartAtom';
 import { useRecoilState } from 'recoil';
+import { useCallback, useEffect } from 'react';
 
 interface CartItemProps {
   items: Content[];
@@ -20,7 +21,34 @@ const CartItem: React.FC<CartItemProps> = ({
   handleQuantityChange,
   handleDeleteItem,
 }) => {
-  const [deliveryFee, setDeliveryFee] = useRecoilState(deliveryFeeState);
+  const [_, setDeliveryFee] = useRecoilState(deliveryFeeState);
+  const [__, setGoodsAmount] = useRecoilState(goodsAmountState);
+
+  const calculateGoods = useCallback(() => {
+    let totalGoodsAmount = 0;
+    let deliveryFee = 0;
+    items?.forEach((item) => {
+      let discountedPrice = item?.productPrice * item?.quantity;
+      const originalPrice = discountedPrice;
+
+      if (item.discountRate !== 0) {
+        const discountRate = (HUNDRED - item.discountRate) / HUNDRED;
+        discountedPrice = item?.productPrice * discountRate * item?.quantity;
+        totalGoodsAmount += discountedPrice;
+      } else {
+        totalGoodsAmount += originalPrice;
+      }
+
+      deliveryFee += item.deliveryFee;
+    });
+
+    setGoodsAmount(totalGoodsAmount);
+    setDeliveryFee(deliveryFee);
+  }, [items, setGoodsAmount, setDeliveryFee]);
+
+  useEffect(() => {
+    calculateGoods();
+  }, [calculateGoods]);
 
   return (
     <div className="flex flex-col w-[100%] h-[94%] border-y-2">
@@ -30,13 +58,11 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
       {items?.map((item: Content) => {
         let discountedPrice = item?.productPrice * item?.quantity;
-        const originalPrice = discountedPrice;
 
         if (item.discountRate !== 0) {
           const discountRate = (HUNDRED - item.discountRate) / HUNDRED;
           discountedPrice = item?.productPrice * discountRate * item?.quantity;
         }
-        setDeliveryFee(deliveryFee + item.deliveryFee);
 
         return (
           <div
@@ -94,7 +120,7 @@ const CartItem: React.FC<CartItemProps> = ({
                 <>
                   <div className="flex w-[full] ">
                     <del className="flex w-[50%] text-slate-400 justify-center">
-                      {originalPrice.toLocaleString()}원
+                      {(item?.productPrice * item?.quantity).toLocaleString()}원
                     </del>
                     <p className="flex w-[50%] text-red-600 ">
                       {item?.discountRate}% 할인

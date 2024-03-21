@@ -1,9 +1,10 @@
 'use client';
-import { deliveryFeeState } from '@/recoil/cartAtom';
+import { deliveryFeeState, goodsAmountState } from '@/recoil/cartAtom';
 import { useRecoilState } from 'recoil';
 
 const CartPayInformation = () => {
-  const [deliveryFee, _] = useRecoilState(deliveryFeeState);
+  const [deliveryFee] = useRecoilState(deliveryFeeState);
+  const [goodsAmount] = useRecoilState(goodsAmountState);
 
   return (
     <>
@@ -11,11 +12,7 @@ const CartPayInformation = () => {
         <div className="flex flex-col w-[90%] h-[60%] justify-center">
           <div className="flex w-[100%] h-[25%] justify-between items-center">
             <p>상품 금액</p>
-            <p>61,880원</p>
-          </div>
-          <div className="flex w-[100%] h-[25%] justify-between items-center">
-            <p>상품 할인금액</p>
-            <p>61,880원</p>
+            <p>{goodsAmount.toLocaleString()}원</p>
           </div>
           <div className="flex w-[100%] h-[25%] justify-between items-center">
             <p>배송비</p>
@@ -24,7 +21,7 @@ const CartPayInformation = () => {
         </div>
         <div className="flex w-[90%] h-[20%] justify-between items-center">
           <p>결제예정금액</p>
-          <p>61,880원</p>
+          <p>{(deliveryFee + goodsAmount).toLocaleString()}원</p>
         </div>
       </div>
       <div className="flex w-[80%] h-[15%] ">

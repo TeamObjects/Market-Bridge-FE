@@ -4,3 +4,8 @@ export const deliveryFeeState = atom<number>({
   key: 'deliveryFeeState',
   default: 0,
 });
+
+export const goodsAmountState = atom<number>({
+  key: 'goodsAmount',
+  default: 0,
+});
