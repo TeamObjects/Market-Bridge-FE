@@ -1,7 +1,7 @@
 import { MouseEventHandler, ReactNode } from 'react';
 
 interface ButtonProps {
-  text: ReactNode;
+  children: ReactNode;
   type?: 'button' | 'submit' | 'reset' | undefined;
   style?: string;
   disabled?: boolean;
@@ -12,7 +12,7 @@ export const STYLE_BUTTON_DEFAULT =
   'w-[100%] h-[44px] xs:h-[40px] p-6 mb-4 text-[13px] text-white rounded-full bg-[#011B5B]';
 
 const Button = ({
-  text,
+  children,
   type = 'button',
   style = STYLE_BUTTON_DEFAULT,
   disabled = false,
@@ -20,7 +20,7 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <button type={type} className={style} onClick={onClick} disabled={disabled}>
-      {text}
+      {children}
     </button>
   );
 };
