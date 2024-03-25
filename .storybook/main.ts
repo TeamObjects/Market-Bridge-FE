@@ -1,5 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs';
-
+import path from "path";
 const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   addons: [
@@ -29,6 +29,14 @@ const config: StorybookConfig = {
       test: /\.svg$/,
       use: ['@svgr/webpack'],
     });
+
+    config.resolve = config.resolve || {};
+    config.resolve.alias = config.resolve.alias || {};
+    /** @ alias 사용 */
+    if (config.resolve) {
+      config.resolve.alias["@"] = path.resolve(__dirname, "../src");
+    }
+
 
     return config;
   },
