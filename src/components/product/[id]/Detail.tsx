@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
 import Image from 'next/image';
 import Tabs, { TabData } from '@/components/shared/Tabs';
@@ -6,6 +5,7 @@ import {
   Dispatch,
   SetStateAction,
   forwardRef,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -162,7 +162,7 @@ const Detail = ({ tabData, setTabData }: Props) => {
   const [isReachedTop, setIsReachedTop] = useState(false);
 
   // TODO: useEffect, useCallback, window와의 관계에 대한 고민
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (tabsRef.current) {
       const rect = tabsRef.current.getBoundingClientRect();
       setIsReachedTop(rect.y <= 0);
@@ -198,16 +198,17 @@ const Detail = ({ tabData, setTabData }: Props) => {
         else return undefined;
       })();
       if (currentTab && tabData.value !== currentTab) {
-        setTabData({ ...tabData, value: currentTab })
+        const newTabData = { ...tabData, value: currentTab };
+        setTabData(newTabData);
       }
     }
-  };
+  }, [tabData, setTabData]);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }; //clean up
-  }, [isReachedTop, descriptionRef, detailRef, reviewRef, qnaRef, handleScroll]);
+  }, [handleScroll]);
 
   return (
     <>
