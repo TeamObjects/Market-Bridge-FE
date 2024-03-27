@@ -13,6 +13,8 @@ import ArrowLeft from './arrowLeft.svg';
 import ArrowRight from './arrowRight.svg';
 import ArrowLeftDouble from './arrowLeftDouble.svg';
 import ArrowRightDouble from './arrowRightDouble.svg';
+import Heart from './heart.svg';
+import Noti from './noti.svg';
 
 export {
   Category,
@@ -30,4 +32,6 @@ export {
   ArrowRight,
   ArrowLeftDouble,
   ArrowRightDouble,
+  Heart,
+  Noti,
 };

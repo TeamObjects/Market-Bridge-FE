@@ -3,19 +3,10 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Button from '@/components/shared/Button';
 import { ShoppingBasket } from '@/../public/svgs';
-
-export type Option = {
-  value: string;
-  label: string;
-};
-export type Item = {
-  thumbnail: string; // 썸네일
-  name: string; // 타이틀
-  discountRate: number; // 할인율
-  price: number; // 원래가격
-};
+import { Item, Option } from '@/app/product/page';
 
 type Props = {
+  list: Item[];
   totalSize: number;
   currentSort: string;
   setCurrentSort: Dispatch<SetStateAction<string>>;
@@ -30,6 +21,7 @@ export type CardProps = {
 };
 
 const ContentView = ({
+  list,
   totalSize,
   currentSort,
   setCurrentSort,
@@ -76,40 +68,6 @@ const ContentView = ({
       </div>
     );
   };
-
-  const list: Item[] = [
-    {
-      thumbnail:
-        'https://thumbnail6.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/1200608459446837-41364cda-fd49-459a-8923-24339515de9b.jpg',
-      name: '꿀고구마',
-      discountRate: 10,
-      price: 15900,
-    },
-    {
-      // thumbnail: "https://images.unsplash.com/photo-1710756115964-f949e92b97fb?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      thumbnail:
-        'https://thumbnail6.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/1200608459446837-41364cda-fd49-459a-8923-24339515de9b.jpg',
-      name: '당근',
-      discountRate: 0,
-      price: 4290,
-    },
-    {
-      // thumbnail: "https://images.unsplash.com/photo-1710756115964-f949e92b97fb?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      thumbnail:
-        'https://thumbnail6.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/1200608459446837-41364cda-fd49-459a-8923-24339515de9b.jpg',
-      name: '친황경 시금치 200g',
-      discountRate: 0,
-      price: 3090,
-    },
-    {
-      // thumbnail: "https://images.unsplash.com/photo-1710756115964-f949e92b97fb?q=80&w=3456&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      thumbnail:
-        'https://thumbnail6.coupangcdn.com/thumbnails/remote/492x492ex/image/retail/images/1200608459446837-41364cda-fd49-459a-8923-24339515de9b.jpg',
-      name: '친환경 쑥갓 150g',
-      discountRate: 0,
-      price: 3990,
-    },
-  ];
 
   const ListView = () => {
     return (
