@@ -2,7 +2,8 @@ import { MouseEventHandler, ReactNode } from 'react';
 
 interface ButtonProps {
   text?: string;
-  children?: ReactNode; /** 아이콘 등 버튼 내부를 복잡하게 정의하고 싶은 경우, text 대신 사용 */
+  /** 아이콘 등 버튼 내부를 복잡하게 정의하고 싶은 경우, text 대신 사용 */
+  children?: ReactNode;
   type?: 'button' | 'submit' | 'reset' | undefined;
   style?: string;
   disabled?: boolean;
