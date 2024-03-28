@@ -9,3 +9,8 @@ export const goodsAmountState = atom<number>({
   key: 'goodsAmount',
   default: 0,
 });
+
+export const discountFeeState = atom<number>({
+  key: 'discountFee',
+  default: 0,
+});

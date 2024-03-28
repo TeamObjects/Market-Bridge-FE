@@ -2,7 +2,11 @@ import Image from 'next/image';
 import { ShoppingCart, Close } from '../../../public/svgs';
 import { Content } from '@/interfaces/cart';
 import { HUNDRED } from '@/constants/constants';
-import { deliveryFeeState, goodsAmountState } from '@/recoil/cartAtom';
+import {
+  deliveryFeeState,
+  goodsAmountState,
+  discountFeeState,
+} from '@/recoil/cartAtom';
 import { useRecoilState } from 'recoil';
 import { useCallback, useEffect } from 'react';
 
@@ -23,13 +27,20 @@ const CartItem: React.FC<CartItemProps> = ({
 }) => {
   const [_, setDeliveryFee] = useRecoilState(deliveryFeeState);
   const [__, setGoodsAmount] = useRecoilState(goodsAmountState);
+  const [___, setDiscountFee] = useRecoilState(discountFeeState);
 
   const calculateGoods = useCallback(() => {
     let totalGoodsAmount = 0;
     let deliveryFee = 0;
+    let total = 0;
+    let discount = 0;
+
     items?.forEach((item) => {
       let discountedPrice = item?.productPrice * item?.quantity;
       const originalPrice = discountedPrice;
+
+      let temp = item?.productPrice * item?.quantity;
+      total += temp;
 
       if (item.discountRate !== 0) {
         const discountRate = (HUNDRED - item.discountRate) / HUNDRED;
@@ -38,13 +49,14 @@ const CartItem: React.FC<CartItemProps> = ({
       } else {
         totalGoodsAmount += originalPrice;
       }
+      discount = total - totalGoodsAmount;
 
       deliveryFee += item.deliveryFee;
     });
-
-    setGoodsAmount(totalGoodsAmount);
+    setDiscountFee(discount);
+    setGoodsAmount(total);
     setDeliveryFee(deliveryFee);
-  }, [items, setGoodsAmount, setDeliveryFee]);
+  }, [items, setGoodsAmount, setDeliveryFee, setDiscountFee]);
 
   useEffect(() => {
     calculateGoods();
