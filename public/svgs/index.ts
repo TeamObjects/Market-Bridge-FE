@@ -9,6 +9,12 @@ import AppleLogo from './apple.svg';
 import ShoppingCart from './shoppingCart.svg';
 import Close from './close.svg';
 import Location from './location.svg';
+import ArrowLeft from './arrowLeft.svg';
+import ArrowRight from './arrowRight.svg';
+import ArrowLeftDouble from './arrowLeftDouble.svg';
+import ArrowRightDouble from './arrowRightDouble.svg';
+import Heart from './heart.svg';
+import Noti from './noti.svg';
 
 export {
   Category,
@@ -22,4 +28,10 @@ export {
   ShoppingCart,
   Close,
   Location,
+  ArrowLeft,
+  ArrowRight,
+  ArrowLeftDouble,
+  ArrowRightDouble,
+  Heart,
+  Noti,
 };

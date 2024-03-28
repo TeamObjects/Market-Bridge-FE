@@ -9,7 +9,7 @@ import {
   Category,
   Mypage,
   ShoppingBasket,
-} from '../../../public/svgs';
+} from '@/../public/svgs';
 
 const EXCLUSION_PATHS = [
   '/login',
@@ -19,7 +19,7 @@ const EXCLUSION_PATHS = [
   '/login/findPassword/changePassword',
 ];
 
-const Header: React.FC = () => {
+const Header = () => {
   const path = usePathname();
 
   if (EXCLUSION_PATHS.includes(path)) return null;
