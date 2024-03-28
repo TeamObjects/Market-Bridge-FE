@@ -53,7 +53,7 @@ const CartItem: React.FC<CartItemProps> = ({
 
       deliveryFee += item.deliveryFee;
     });
-    setDiscountFee(discount);
+    setDiscountFee(Math.floor(discount));
     setGoodsAmount(total);
     setDeliveryFee(deliveryFee);
   }, [items, setGoodsAmount, setDeliveryFee, setDiscountFee]);
@@ -139,7 +139,7 @@ const CartItem: React.FC<CartItemProps> = ({
                     </p>
                   </div>
                   <strong className="flex justify-center">
-                    {discountedPrice.toLocaleString()}원
+                    {Math.floor(discountedPrice).toLocaleString()}원
                   </strong>
                 </>
               )}
